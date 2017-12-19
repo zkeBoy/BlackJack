@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  BlackJack
+//
+//  Created by YellowBoy on 2017/12/17.
+//  Copyright © 2017年 YellowBoy. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <Masonry.h>
+#import "ZKGameStart.h"
+#import "ZKPublickHeader.h"
+#import "ZKCardsManager.h"
+#import "ZKGameScreen.h"
+#import "UIImageView+Animation.h"
+
+#endif /* PrefixHeader_pch */

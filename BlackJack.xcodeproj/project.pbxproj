@@ -1,0 +1,503 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D582804E1FE633FF00A3B313 /* ZKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = D582804D1FE633FF00A3B313 /* ZKCard.m */; };
+		D58280541FE6344900A3B313 /* ZKGameStart.m in Sources */ = {isa = PBXBuildFile; fileRef = D58280531FE6344900A3B313 /* ZKGameStart.m */; };
+		D58280571FE6356400A3B313 /* icon_start.png in Resources */ = {isa = PBXBuildFile; fileRef = D58280561FE6356400A3B313 /* icon_start.png */; };
+		D582805B1FE65E8300A3B313 /* ZKGameScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D582805A1FE65E8300A3B313 /* ZKGameScreen.m */; };
+		D582805D1FE79EEA00A3B313 /* icon_Card.png in Resources */ = {isa = PBXBuildFile; fileRef = D582805C1FE79EEA00A3B313 /* icon_Card.png */; };
+		D58280611FE7A53800A3B313 /* UIImageView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = D58280601FE7A53800A3B313 /* UIImageView+Animation.m */; };
+		D58560F21FE62A7100D56C37 /* ZKCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D58560F11FE62A7100D56C37 /* ZKCardsManager.m */; };
+		D5E5CE501FE6224700522C0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E5CE4F1FE6224700522C0B /* AppDelegate.m */; };
+		D5E5CE531FE6224700522C0B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E5CE521FE6224700522C0B /* ViewController.m */; };
+		D5E5CE561FE6224700522C0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E5CE541FE6224700522C0B /* Main.storyboard */; };
+		D5E5CE581FE6224700522C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E5CE571FE6224700522C0B /* Assets.xcassets */; };
+		D5E5CE5B1FE6224700522C0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E5CE591FE6224700522C0B /* LaunchScreen.storyboard */; };
+		D5E5CE5E1FE6224700522C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E5CE5D1FE6224700522C0B /* main.m */; };
+		D601AD4FE7CC9C42205D1174 /* libPods-BlackJack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		84F230ADF1AE8068EDFC87D1 /* Pods-BlackJack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackJack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlackJack/Pods-BlackJack.debug.xcconfig"; sourceTree = "<group>"; };
+		BC69BEF8F2D41D335EF6195D /* Pods-BlackJack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackJack.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlackJack/Pods-BlackJack.release.xcconfig"; sourceTree = "<group>"; };
+		D582804C1FE633FF00A3B313 /* ZKCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKCard.h; sourceTree = "<group>"; };
+		D582804D1FE633FF00A3B313 /* ZKCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKCard.m; sourceTree = "<group>"; };
+		D58280521FE6344900A3B313 /* ZKGameStart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKGameStart.h; sourceTree = "<group>"; };
+		D58280531FE6344900A3B313 /* ZKGameStart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKGameStart.m; sourceTree = "<group>"; };
+		D58280561FE6356400A3B313 /* icon_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_start.png; sourceTree = "<group>"; };
+		D58280581FE6381400A3B313 /* ZKPublickHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKPublickHeader.h; sourceTree = "<group>"; };
+		D58280591FE65E8300A3B313 /* ZKGameScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKGameScreen.h; sourceTree = "<group>"; };
+		D582805A1FE65E8300A3B313 /* ZKGameScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKGameScreen.m; sourceTree = "<group>"; };
+		D582805C1FE79EEA00A3B313 /* icon_Card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_Card.png; sourceTree = "<group>"; };
+		D582805F1FE7A53800A3B313 /* UIImageView+Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Animation.h"; sourceTree = "<group>"; };
+		D58280601FE7A53800A3B313 /* UIImageView+Animation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Animation.m"; sourceTree = "<group>"; };
+		D58560F01FE62A7100D56C37 /* ZKCardsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKCardsManager.h; sourceTree = "<group>"; };
+		D58560F11FE62A7100D56C37 /* ZKCardsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKCardsManager.m; sourceTree = "<group>"; };
+		D5E5CE4B1FE6224700522C0B /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E5CE4E1FE6224700522C0B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D5E5CE4F1FE6224700522C0B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D5E5CE511FE6224700522C0B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D5E5CE521FE6224700522C0B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D5E5CE551FE6224700522C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D5E5CE571FE6224700522C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5E5CE5A1FE6224700522C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D5E5CE5C1FE6224700522C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5E5CE5D1FE6224700522C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D5E5CE661FE6241800522C0B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BlackJack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5E5CE481FE6224700522C0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D601AD4FE7CC9C42205D1174 /* libPods-BlackJack.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24BD905A48079AE51C6029B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				84F230ADF1AE8068EDFC87D1 /* Pods-BlackJack.debug.xcconfig */,
+				BC69BEF8F2D41D335EF6195D /* Pods-BlackJack.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		94FCE80D5A82722596E34FEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D582804B1FE633D400A3B313 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D582804C1FE633FF00A3B313 /* ZKCard.h */,
+				D582804D1FE633FF00A3B313 /* ZKCard.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D58280551FE6356400A3B313 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D58280561FE6356400A3B313 /* icon_start.png */,
+				D582805C1FE79EEA00A3B313 /* icon_Card.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D582805E1FE7A52400A3B313 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D582805F1FE7A53800A3B313 /* UIImageView+Animation.h */,
+				D58280601FE7A53800A3B313 /* UIImageView+Animation.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		D5E5CE421FE6224700522C0B = {
+			isa = PBXGroup;
+			children = (
+				D5E5CE4D1FE6224700522C0B /* BlackJack */,
+				D5E5CE4C1FE6224700522C0B /* Products */,
+				24BD905A48079AE51C6029B9 /* Pods */,
+				94FCE80D5A82722596E34FEC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D5E5CE4C1FE6224700522C0B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5E5CE4B1FE6224700522C0B /* BlackJack.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5E5CE4D1FE6224700522C0B /* BlackJack */ = {
+			isa = PBXGroup;
+			children = (
+				D5E5CE4E1FE6224700522C0B /* AppDelegate.h */,
+				D5E5CE4F1FE6224700522C0B /* AppDelegate.m */,
+				D5E5CE511FE6224700522C0B /* ViewController.h */,
+				D5E5CE521FE6224700522C0B /* ViewController.m */,
+				D582805E1FE7A52400A3B313 /* Category */,
+				D58280551FE6356400A3B313 /* Resources */,
+				D582804B1FE633D400A3B313 /* Model */,
+				D5E5CE641FE6228E00522C0B /* Tool */,
+				D5E5CE651FE6240600522C0B /* MacroFile */,
+				D5E5CE671FE625A600522C0B /* Views */,
+				D5E5CE541FE6224700522C0B /* Main.storyboard */,
+				D5E5CE571FE6224700522C0B /* Assets.xcassets */,
+				D5E5CE591FE6224700522C0B /* LaunchScreen.storyboard */,
+				D5E5CE5C1FE6224700522C0B /* Info.plist */,
+				D5E5CE5D1FE6224700522C0B /* main.m */,
+			);
+			path = BlackJack;
+			sourceTree = "<group>";
+		};
+		D5E5CE641FE6228E00522C0B /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				D58560F01FE62A7100D56C37 /* ZKCardsManager.h */,
+				D58560F11FE62A7100D56C37 /* ZKCardsManager.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		D5E5CE651FE6240600522C0B /* MacroFile */ = {
+			isa = PBXGroup;
+			children = (
+				D5E5CE661FE6241800522C0B /* PrefixHeader.pch */,
+				D58280581FE6381400A3B313 /* ZKPublickHeader.h */,
+			);
+			path = MacroFile;
+			sourceTree = "<group>";
+		};
+		D5E5CE671FE625A600522C0B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D58280521FE6344900A3B313 /* ZKGameStart.h */,
+				D58280531FE6344900A3B313 /* ZKGameStart.m */,
+				D58280591FE65E8300A3B313 /* ZKGameScreen.h */,
+				D582805A1FE65E8300A3B313 /* ZKGameScreen.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D5E5CE4A1FE6224700522C0B /* BlackJack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5E5CE611FE6224700522C0B /* Build configuration list for PBXNativeTarget "BlackJack" */;
+			buildPhases = (
+				2E908C64B68042B371C33F26 /* [CP] Check Pods Manifest.lock */,
+				D5E5CE471FE6224700522C0B /* Sources */,
+				D5E5CE481FE6224700522C0B /* Frameworks */,
+				D5E5CE491FE6224700522C0B /* Resources */,
+				2194B4340BEB606077DA228F /* [CP] Embed Pods Frameworks */,
+				44680BF8628F2D43D6BD5972 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlackJack;
+			productName = BlackJack;
+			productReference = D5E5CE4B1FE6224700522C0B /* BlackJack.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D5E5CE431FE6224700522C0B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = YellowBoy;
+				TargetAttributes = {
+					D5E5CE4A1FE6224700522C0B = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D5E5CE461FE6224700522C0B /* Build configuration list for PBXProject "BlackJack" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D5E5CE421FE6224700522C0B;
+			productRefGroup = D5E5CE4C1FE6224700522C0B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5E5CE4A1FE6224700522C0B /* BlackJack */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5E5CE491FE6224700522C0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5E5CE5B1FE6224700522C0B /* LaunchScreen.storyboard in Resources */,
+				D5E5CE581FE6224700522C0B /* Assets.xcassets in Resources */,
+				D582805D1FE79EEA00A3B313 /* icon_Card.png in Resources */,
+				D5E5CE561FE6224700522C0B /* Main.storyboard in Resources */,
+				D58280571FE6356400A3B313 /* icon_start.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2194B4340BEB606077DA228F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BlackJack/Pods-BlackJack-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E908C64B68042B371C33F26 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlackJack-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44680BF8628F2D43D6BD5972 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BlackJack/Pods-BlackJack-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D5E5CE471FE6224700522C0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D582805B1FE65E8300A3B313 /* ZKGameScreen.m in Sources */,
+				D58280611FE7A53800A3B313 /* UIImageView+Animation.m in Sources */,
+				D582804E1FE633FF00A3B313 /* ZKCard.m in Sources */,
+				D58560F21FE62A7100D56C37 /* ZKCardsManager.m in Sources */,
+				D5E5CE531FE6224700522C0B /* ViewController.m in Sources */,
+				D5E5CE5E1FE6224700522C0B /* main.m in Sources */,
+				D5E5CE501FE6224700522C0B /* AppDelegate.m in Sources */,
+				D58280541FE6344900A3B313 /* ZKGameStart.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D5E5CE541FE6224700522C0B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5E5CE551FE6224700522C0B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D5E5CE591FE6224700522C0B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5E5CE5A1FE6224700522C0B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D5E5CE5F1FE6224700522C0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D5E5CE601FE6224700522C0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D5E5CE621FE6224700522C0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84F230ADF1AE8068EDFC87D1 /* Pods-BlackJack.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZA97MDYC4H;
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/MacroFile/PrefixHeader.pch";
+				INFOPLIST_FILE = BlackJack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ZHANGKE.BlackJack;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D5E5CE631FE6224700522C0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC69BEF8F2D41D335EF6195D /* Pods-BlackJack.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZA97MDYC4H;
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/MacroFile/PrefixHeader.pch";
+				INFOPLIST_FILE = BlackJack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ZHANGKE.BlackJack;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D5E5CE461FE6224700522C0B /* Build configuration list for PBXProject "BlackJack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5E5CE5F1FE6224700522C0B /* Debug */,
+				D5E5CE601FE6224700522C0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5E5CE611FE6224700522C0B /* Build configuration list for PBXNativeTarget "BlackJack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5E5CE621FE6224700522C0B /* Debug */,
+				D5E5CE631FE6224700522C0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D5E5CE431FE6224700522C0B /* Project object */;
+}
