@@ -27,12 +27,14 @@
 //根据牌的cardCombination 取值 例如:♥️K = 10
 - (NSInteger)getValueByCard:(ZKCard *)card;
 
-//
+//牌堆的位置,初始化牌的位置
 - (CGRect)cardDefaultFrame;
 
 //庄家
-- (CGRect)theBankerCardFrame;
+- (CGSize)theBankerCardPosition;
+- (void)bankerAddCard;
 
 //玩家
-- (CGRect)thePlayerCardFrame;
+- (CGSize)thePlayerCardPosition;
+- (void)playerAddCard;
 @end

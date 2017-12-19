@@ -11,8 +11,15 @@
 @interface ZKCardsManager()
 @property (nonatomic, strong) NSMutableArray * allCards;
 @property (nonatomic, strong) NSMutableArray * existCards;
+
+//庄家
+@property (nonatomic, assign) CGSize  bankerPosition;
+//玩家
+@property (nonatomic, assign) CGSize  playerPosition;
+@property (nonatomic, assign) CGFloat moveLength;
 @end
 
+//所有牌的总数
 static NSInteger cards = 52;
 
 @implementation ZKCardsManager
@@ -29,6 +36,9 @@ static NSInteger cards = 52;
 - (instancetype)init{
     self = [super init];
     if (self) {
+        self.bankerPosition = CGSizeMake(ZScale(-320), ZScale(50));
+        self.playerPosition = CGSizeMake(ZScale(-300), ZScale(180));
+        self.moveLength = ZScale(20);
         [self loadCards];
     }
     return self;
@@ -112,15 +122,27 @@ static NSInteger cards = 52;
 }
 
 - (CGRect)cardDefaultFrame {
-    return CGRectMake(S_WIDTH-100-119/2, 40, 119/2, 165/2);
+    CGFloat w = ZScale(119/2);
+    CGFloat h = ZScale(165/2);
+    CGFloat x = ZScale(S_WIDTH-100-119/2);
+    CGFloat y = ZScale(40);
+    return CGRectMake(x, y, w, h);
 }
 
-- (CGRect)theBankerCardFrame{
-    return CGRectZero;
+- (CGSize)theBankerCardPosition{
+    return self.bankerPosition;
 }
 
-- (CGRect)thePlayerCardFrame{
-    return CGRectZero;
+- (void)bankerAddCard{
+    self.bankerPosition = CGSizeMake(self.bankerPosition.width+self.moveLength, ZScale(50));
+}
+
+- (CGSize)thePlayerCardPosition{
+    return self.playerPosition;
+}
+
+- (void)playerAddCard {
+    self.playerPosition = CGSizeMake(self.playerPosition.width+self.moveLength, ZScale(180));
 }
 
 #pragma mark - lazy init

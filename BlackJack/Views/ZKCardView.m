@@ -22,17 +22,19 @@
     return self;
 }
 
-- (void)animateWithDuration:(NSTimeInterval)timeInterval translation:(CGRect)position {
-    
+- (void)animateWithDuration:(NSTimeInterval)timeInterval translation:(CGSize)position completion:(void(^)(void))completion{
+    [self animateWithDuration:timeInterval translationX:position.width translationY:position.height completion:completion];
 }
 
-- (void)animateWithDuration:(NSTimeInterval)timeInterval translationX:(CGFloat)x translationY:(CGFloat)y {
+- (void)animateWithDuration:(NSTimeInterval)timeInterval translationX:(CGFloat)x translationY:(CGFloat)y completion:(void(^)(void))completion{
     [UIView animateWithDuration:timeInterval animations:^{
         //移动位置CGAffineTransformMakeTranslation(100, 100); 在原来基础上移动位置
         self.transform = CGAffineTransformMakeTranslation(x, y);
     }completion:^(BOOL finished) {
         [self transitionFlipFromLeftWithBlock:^{
-            
+            if (completion) {
+                completion ();
+            }
         }];
     }];
 }
