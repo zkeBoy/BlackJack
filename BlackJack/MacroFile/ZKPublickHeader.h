@@ -15,6 +15,7 @@
 #define S_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 #define WEAK_SELF(obj) __weak typeof(obj) weak##obj = obj;
+#define W_H 50
 
 
 #endif /* ZKPublickHeader_h */

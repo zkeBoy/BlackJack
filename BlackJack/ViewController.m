@@ -25,7 +25,7 @@
 
 - (void)setUpUI {
     [self.view addSubview:self.gameScreen];
-    [self.view addSubview:self.startView];
+    //[self.view addSubview:self.startView];
 }
 
 - (void)hiddenStartView {

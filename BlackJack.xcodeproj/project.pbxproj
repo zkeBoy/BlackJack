@@ -21,6 +21,8 @@
 		D5E5CE5B1FE6224700522C0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E5CE591FE6224700522C0B /* LaunchScreen.storyboard */; };
 		D5E5CE5E1FE6224700522C0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E5CE5D1FE6224700522C0B /* main.m */; };
 		D601AD4FE7CC9C42205D1174 /* libPods-BlackJack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */; };
+		E2D54EC71FE900E200BC2ACE /* icon_Card_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */; };
+		E2D54ECA1FE9068800BC2ACE /* ZKCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54EC91FE9068800BC2ACE /* ZKCardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,9 @@
 		D5E5CE5D1FE6224700522C0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D5E5CE661FE6241800522C0B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BlackJack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_Card_Select.png; sourceTree = "<group>"; };
+		E2D54EC81FE9068800BC2ACE /* ZKCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKCardView.h; sourceTree = "<group>"; };
+		E2D54EC91FE9068800BC2ACE /* ZKCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKCardView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +99,7 @@
 		D58280551FE6356400A3B313 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */,
 				D58280561FE6356400A3B313 /* icon_start.png */,
 				D582805C1FE79EEA00A3B313 /* icon_Card.png */,
 			);
@@ -174,6 +180,8 @@
 				D58280531FE6344900A3B313 /* ZKGameStart.m */,
 				D58280591FE65E8300A3B313 /* ZKGameScreen.h */,
 				D582805A1FE65E8300A3B313 /* ZKGameScreen.m */,
+				E2D54EC81FE9068800BC2ACE /* ZKCardView.h */,
+				E2D54EC91FE9068800BC2ACE /* ZKCardView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +251,7 @@
 				D5E5CE581FE6224700522C0B /* Assets.xcassets in Resources */,
 				D582805D1FE79EEA00A3B313 /* icon_Card.png in Resources */,
 				D5E5CE561FE6224700522C0B /* Main.storyboard in Resources */,
+				E2D54EC71FE900E200BC2ACE /* icon_Card_Select.png in Resources */,
 				D58280571FE6356400A3B313 /* icon_start.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D582805B1FE65E8300A3B313 /* ZKGameScreen.m in Sources */,
+				E2D54ECA1FE9068800BC2ACE /* ZKCardView.m in Sources */,
 				D58280611FE7A53800A3B313 /* UIImageView+Animation.m in Sources */,
 				D582804E1FE633FF00A3B313 /* ZKCard.m in Sources */,
 				D58560F21FE62A7100D56C37 /* ZKCardsManager.m in Sources */,

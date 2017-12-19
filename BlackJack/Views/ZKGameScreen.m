@@ -15,46 +15,47 @@
 @property (nonatomic, strong) UIButton    * moreCardBtn; //要牌
 @property (nonatomic, strong) UILabel     * betlabel;    //现实倍数
 @property (nonatomic, strong) UIImageView * cardView;
+@property (nonatomic, strong) NSMutableArray * allCards;
 @end
-
-#define W_H 50
 
 @implementation ZKGameScreen
 
 #pragma mark - Button Action
 //下注方法
 - (void)betBtnAction:(UIButton *)button {
+    button.enabled = NO;
+    
     //玩家
     ZKCard * card1 = [ZKCardsManager shareCardsManager].getCard;
     ZKCard * card2 = [ZKCardsManager shareCardsManager].getCard;
-    UIImageView * cardView1 = [self cardDefaultView];
-    UIImageView * cardView2 = [self cardDefaultView];
-    [self addSubview:cardView1];
-    [self addSubview:cardView2];
-    cardView1.frame = self.cardView.frame;
-    cardView2.frame = self.cardView.frame;
-    [UIView animateWithDuration:0.5 animations:^{
-        //移动位置
-    }completion:^(BOOL finished) {
-        
-    }];
+    ZKCardView * cardView1 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+    ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+    [self addSubview:cardView1]; [self.allCards addObject:cardView1];
+    [self addSubview:cardView2]; [self.allCards addObject:cardView2];
+    [cardView1 animateWithDuration:0.5 translationX:-320 translationY:180];
+    [cardView2 animateWithDuration:0.7 translationX:-300 translationY:180];
+    
     
     //庄家
     ZKCard * card3 = [ZKCardsManager shareCardsManager].getCard;
-    UIImageView * cardView3 = [self cardDefaultView];
+    ZKCardView * cardView3 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     [self addSubview:cardView3];
-    cardView3.frame = self.cardView.frame;
-    [UIView animateWithDuration:0.5 animations:^{
-        //移动位置
-    } completion:^(BOOL finished) {
-        
-    }];
+    [self.allCards addObject:cardView3];
+    [cardView3 animateWithDuration:0.5 translationX:-320 translationY:50];
 }
 
 //双倍方法
 - (void)doubleBtnAction:(UIButton *)button {
     NSInteger bet = self.betlabel.text.integerValue*2;
     self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)bet];
+    
+    for (ZKCardView * card in self.allCards) {
+        if ([card isKindOfClass:[ZKCardView class]]) {
+            [card transitionFlipFromRightWithBlock:^{
+                
+            }];
+        }
+    }
 }
 
 //停牌方法
@@ -91,10 +92,13 @@
 }
 
 #pragma mark - setUI
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self setUI];
-    [self setChipButtons];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setUI];
+        [self setChipButtons];
+    }
+    return self;
 }
 
 - (void)setUI {
@@ -121,7 +125,7 @@
         make.right.equalTo(self).offset(-200);
         make.bottom.equalTo(self).offset(-30);
     }];
-    
+     
     [self addSubview:self.moreCardBtn];
     [self.moreCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(W_H);
@@ -138,12 +142,6 @@
     }];
     
     [self addSubview:self.cardView];
-    [self.cardView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(119/2);
-        make.height.mas_equalTo(165/2);
-        make.top.equalTo(self).offset(40);
-        make.right.equalTo(self).offset(-100);
-    }];
 }
 
 //设置筹码
@@ -236,6 +234,7 @@
 - (UIImageView *)cardView {
     if (!_cardView) {
         _cardView = [self cardDefaultView];
+        _cardView.frame = [ZKCardsManager shareCardsManager].cardDefaultFrame;
     }
     return _cardView;
 }
@@ -243,6 +242,13 @@
 - (UIImageView *)cardDefaultView {
     UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_Card"]];
     return imageView;
+}
+
+- (NSMutableArray *)allCards {
+    if (!_allCards) {
+        _allCards = [[NSMutableArray alloc] init];
+    }
+    return _allCards;
 }
 
 - (UIButton *)loadButtonAddTarget:(nullable id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents nor:(UIImage *)norImage select:(UIImage *)selectImage {

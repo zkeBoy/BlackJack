@@ -111,6 +111,18 @@ static NSInteger cards = 52;
     return card.cardNum.integerValue;
 }
 
+- (CGRect)cardDefaultFrame {
+    return CGRectMake(S_WIDTH-100-119/2, 40, 119/2, 165/2);
+}
+
+- (CGRect)theBankerCardFrame{
+    return CGRectZero;
+}
+
+- (CGRect)thePlayerCardFrame{
+    return CGRectZero;
+}
+
 #pragma mark - lazy init
 - (NSMutableArray *)allCards {
     if (!_allCards) {
