@@ -18,6 +18,9 @@
 @property (nonatomic, strong) NSMutableArray * allCards;
 @property (nonatomic, strong) UILabel     * bankerScore; //庄家得分
 @property (nonatomic, strong) UILabel     * playerScore; //玩家得分
+
+@property (nonatomic, strong) UILabel     * coinLabel;  //玩家金币
+
 @end
 
 @implementation ZKGameScreen
@@ -67,21 +70,26 @@
 
 //双倍方法
 - (void)doubleBtnAction:(UIButton *)button {
+    //判断玩家的金币是否够
+    NSInteger coin = [ZKCardsManagerDefault playCoinNum];
     NSInteger bet = self.betlabel.text.integerValue*2;
-    self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)bet];
-    
-    for (ZKCardView * card in self.allCards) {
-        if ([card isKindOfClass:[ZKCardView class]]) {
-            [card transitionFlipFromRightWithBlock:^{
-                
-            }];
-        }
+    if (coin<bet) {
+        //玩家金币不足,提醒用户
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"金币不足"
+                                                             message:@""
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"确定"
+                                                   otherButtonTitles:@"取消",
+                                   nil];
+        [alertView show];
+        return;
     }
+    self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)bet];
 }
 
 //停牌方法
 - (void)stopCardBtnAction:(UIButton *)button {
-    
+    //该庄家要牌了
 }
 
 //要牌方法
@@ -96,6 +104,19 @@
         NSInteger s1 = weakself.playerScore.text.integerValue;
         NSInteger s2 = [[ZKCardsManager shareCardsManager] getValueByCard:card];
         weakself.playerScore.text = [NSString stringWithFormat:@"%ld",(long)(s1+s2)];
+        
+        //比较玩家是否超过21
+        NSInteger player = s1+s2;
+        if (player>MaxScore) {
+            //玩家输了
+            NSInteger lose = self.betlabel.text.integerValue;
+            [ZKCardsManagerDefault playerlose:lose];
+            //更新玩家金币
+            [self updatePlayerCoinNum];
+            
+            //重新发牌
+            return ;
+        }
     }];
 }
 
@@ -121,6 +142,8 @@
             break;
     }
 }
+
+//- (void)restart
 
 #pragma mark - setUI
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -173,6 +196,14 @@
     }];
     
     [self addSubview:self.cardView];
+    
+    [self addSubview:self.coinLabel];
+    [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(ZScale(40));
+        make.top.equalTo(self).offset(ZScale(10));
+        make.left.equalTo(self.betBtn.mas_left);
+        make.width.equalTo(self.betlabel.mas_width);
+    }];
 }
 
 //设置筹码
@@ -203,8 +234,12 @@
     }
 }
 
-#pragma mark - lazy init
+#pragma mark - Paivate Method
+- (void)updatePlayerCoinNum {
+    _coinLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
+}
 
+#pragma mark - lazy init
 - (UIImageView *)backgrodundView {
     if (!_backgrodundView) {
         _backgrodundView = [[UIImageView alloc] init];
@@ -256,7 +291,7 @@
         _betlabel.layer.cornerRadius = 10;
         _betlabel.layer.masksToBounds = YES;
         _betlabel.font = [UIFont boldSystemFontOfSize:18];
-        _betlabel.text = NSLocalizedString(@"0", nil);
+        _betlabel.text = NSLocalizedString(@"20", nil);
     }
     return _betlabel;
 }
@@ -293,6 +328,22 @@
         _playerScore = [self loadScoreLabel];
     }
     return _playerScore;
+}
+
+- (UILabel *)coinLabel {
+    if (!_coinLabel) {
+        _coinLabel = [[UILabel alloc] init];
+        _coinLabel.backgroundColor = [UIColor clearColor];
+        _coinLabel.textAlignment = NSTextAlignmentRight;
+        _coinLabel.textColor = [UIColor whiteColor];
+        _coinLabel.layer.borderWidth = 2;
+        _coinLabel.layer.borderColor = [UIColor yellowColor].CGColor;
+        _coinLabel.layer.cornerRadius = 10;
+        _coinLabel.layer.masksToBounds = YES;
+        _coinLabel.font = [UIFont boldSystemFontOfSize:18];
+        [self updatePlayerCoinNum];
+    }
+    return _coinLabel;
 }
 
 - (UIButton *)loadButtonAddTarget:(nullable id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents nor:(UIImage *)norImage select:(UIImage *)selectImage {

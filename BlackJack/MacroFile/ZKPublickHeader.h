@@ -18,4 +18,8 @@
 #define W_H 50
 #define ZScale(s) (s*(S_WIDTH/736))
 
+#define userDefaults [NSUserDefaults standardUserDefaults]
+
+static NSString * const playerCoinNumKey = @"playerCoinNum";
+
 #endif /* ZKPublickHeader_h */

@@ -17,6 +17,8 @@
 //玩家
 @property (nonatomic, assign) CGSize  playerPosition;
 @property (nonatomic, assign) CGFloat moveLength;
+
+@property (nonatomic, assign) NSInteger playerCoin;
 @end
 
 //所有牌的总数
@@ -32,16 +34,22 @@ static NSInteger cards = 52;
     return cardManager;
 }
 
-#pragma mark - Private Method
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.bankerPosition = CGSizeMake(ZScale(-320), ZScale(50));
-        self.playerPosition = CGSizeMake(ZScale(-300), ZScale(180));
-        self.moveLength = ZScale(20);
+        [self setManagerDefault];
         [self loadCards];
     }
     return self;
+}
+
+- (void)setManagerDefault {
+    self.bankerPosition = CGSizeMake(ZScale(-320), ZScale(50));
+    self.playerPosition = CGSizeMake(ZScale(-300), ZScale(180));
+    self.moveLength = ZScale(20);
+    NSNumber * coin = [userDefaults objectForKey:playerCoinNumKey];
+    self.playerCoin = !coin?1000:coin.integerValue;
+    [userDefaults synchronize];
 }
 
 //生产牌 produce cards
@@ -60,7 +68,7 @@ static NSInteger cards = 52;
 #ifdef ZKDebug
     NSInteger index=1;
     for (ZKCard * card in self.allCards) {
-        NSLog(@"第%ld张牌---%@",index,card.cardCombination);
+        NSLog(@"第%ld张牌---%@",(long)index,card.cardCombination);
         index++;
     }
 #endif
@@ -143,6 +151,24 @@ static NSInteger cards = 52;
 
 - (void)playerAddCard {
     self.playerPosition = CGSizeMake(self.playerPosition.width+self.moveLength, ZScale(180));
+}
+
+- (NSInteger)playCoinNum {
+    return self.playerCoin;
+}
+
+- (void)playerWin:(NSInteger)coin{
+    self.playerCoin = self.playerCoin+coin;
+    NSNumber * num = [NSNumber numberWithInteger:self.playerCoin];
+    [userDefaults setObject:num forKey:playerCoinNumKey];
+    [userDefaults synchronize];
+}
+
+- (void)playerlose:(NSInteger)coin{
+    self.playerCoin = self.playerCoin-coin;
+    NSNumber * num = [NSNumber numberWithInteger:self.playerCoin];
+    [userDefaults setObject:num forKey:playerCoinNumKey];
+    [userDefaults synchronize];
 }
 
 #pragma mark - lazy init
