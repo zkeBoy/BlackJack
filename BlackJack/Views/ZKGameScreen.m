@@ -38,12 +38,13 @@
     [cardView2 animateWithDuration:0.7 translationX:-300 translationY:180 completion:^{
         //加载玩家分数
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakself addSubview:weakself.playerScore];
-            weakself.playerScore.frame = CGRectMake(ZScale((S_WIDTH-100-119/2-335)), 220+165/2, 30, 30);
             NSInteger s1 = [[ZKCardsManager shareCardsManager] getValueByCard:card1];
             NSInteger s2 = [[ZKCardsManager shareCardsManager] getValueByCard:card2];
             NSInteger pScore = s1+s2;
             weakself.playerScore.text = [NSString stringWithFormat:@"%ld",(long)pScore];
+            weakself.playerScore.hidden = NO;
+            weakself.playerScore.frame = CGRectMake(ZScale((S_WIDTH-100-119/2-335)), ZScale(220+165/4-15), ZScale(30), ZScale(30));
+            [weakself addSubview:weakself.playerScore];
         });
     }];
     
@@ -55,10 +56,11 @@
     [cardView3 animateWithDuration:0.5 translationX:-320 translationY:50 completion:^{
         //加载庄家分数
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakself addSubview:weakself.bankerScore];
-            weakself.bankerScore.frame = CGRectMake(ZScale((S_WIDTH-100-119/2-335)), 90+165/2, 30, 30);
             NSInteger bScore = [[ZKCardsManager shareCardsManager] getValueByCard:card3];
             weakself.bankerScore.text = [NSString stringWithFormat:@"%ld",(long)bScore];
+            weakself.bankerScore.hidden = NO;
+            weakself.bankerScore.frame = CGRectMake(ZScale((S_WIDTH-100-119/2-335)), ZScale(90+165/4-15), ZScale(30), ZScale(30));
+            [weakself addSubview:weakself.bankerScore];
         });
     }];
 }
@@ -199,7 +201,6 @@
         }];
         index++;
     }
-    
 }
 
 #pragma mark - lazy init
@@ -291,7 +292,7 @@
     if (!_playerScore) {
         _playerScore = [self loadScoreLabel];
     }
-    return _bankerScore;
+    return _playerScore;
 }
 
 - (UIButton *)loadButtonAddTarget:(nullable id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents nor:(UIImage *)norImage select:(UIImage *)selectImage {
@@ -306,14 +307,15 @@
 }
 
 - (UILabel *)loadScoreLabel {
-    UILabel * Score = [[UILabel alloc] init];
-    Score.textColor = [UIColor whiteColor];
-    Score.textAlignment = NSTextAlignmentCenter;
-    Score.backgroundColor = [UIColor purpleColor];
-    Score.layer.cornerRadius = 15;
-    Score.layer.masksToBounds = YES;
-    Score.font = [UIFont boldSystemFontOfSize:18];
-    return Score;
+    UILabel * score = [[UILabel alloc] init];
+    score.textColor = [UIColor whiteColor];
+    score.textAlignment = NSTextAlignmentCenter;
+    score.backgroundColor = [UIColor purpleColor];
+    score.layer.cornerRadius = 15;
+    score.layer.masksToBounds = YES;
+    score.font = [UIFont boldSystemFontOfSize:18];
+    score.hidden = YES;
+    return score;
 }
 
 /*
