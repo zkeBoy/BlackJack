@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, clickType) {
+    clickTypeEnd = 0,
+    clickTypeBet = 1,
+    clickTypeDouble = 2,
+    clickTypeStop = 3,
+    clickTypeMore = 4
+};
+
 @interface ZKGameScreen : UIView
 
 @end

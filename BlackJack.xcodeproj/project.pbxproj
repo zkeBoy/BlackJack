@@ -23,6 +23,8 @@
 		D601AD4FE7CC9C42205D1174 /* libPods-BlackJack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */; };
 		E2D54EC71FE900E200BC2ACE /* icon_Card_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */; };
 		E2D54ECA1FE9068800BC2ACE /* ZKCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54EC91FE9068800BC2ACE /* ZKCardView.m */; };
+		E2D54F291FEA469700BC2ACE /* ZKBankerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54F281FEA469700BC2ACE /* ZKBankerManager.m */; };
+		E2D54F2C1FEA50A600BC2ACE /* ZKHelperView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54F2B1FEA50A600BC2ACE /* ZKHelperView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,10 @@
 		E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_Card_Select.png; sourceTree = "<group>"; };
 		E2D54EC81FE9068800BC2ACE /* ZKCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKCardView.h; sourceTree = "<group>"; };
 		E2D54EC91FE9068800BC2ACE /* ZKCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKCardView.m; sourceTree = "<group>"; };
+		E2D54F271FEA469700BC2ACE /* ZKBankerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKBankerManager.h; sourceTree = "<group>"; };
+		E2D54F281FEA469700BC2ACE /* ZKBankerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKBankerManager.m; sourceTree = "<group>"; };
+		E2D54F2A1FEA50A600BC2ACE /* ZKHelperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKHelperView.h; sourceTree = "<group>"; };
+		E2D54F2B1FEA50A600BC2ACE /* ZKHelperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKHelperView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +166,10 @@
 			children = (
 				D58560F01FE62A7100D56C37 /* ZKCardsManager.h */,
 				D58560F11FE62A7100D56C37 /* ZKCardsManager.m */,
+				E2D54F271FEA469700BC2ACE /* ZKBankerManager.h */,
+				E2D54F281FEA469700BC2ACE /* ZKBankerManager.m */,
+				E2D54F2A1FEA50A600BC2ACE /* ZKHelperView.h */,
+				E2D54F2B1FEA50A600BC2ACE /* ZKHelperView.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -321,6 +331,8 @@
 				D58560F21FE62A7100D56C37 /* ZKCardsManager.m in Sources */,
 				D5E5CE531FE6224700522C0B /* ViewController.m in Sources */,
 				D5E5CE5E1FE6224700522C0B /* main.m in Sources */,
+				E2D54F2C1FEA50A600BC2ACE /* ZKHelperView.m in Sources */,
+				E2D54F291FEA469700BC2ACE /* ZKBankerManager.m in Sources */,
 				D5E5CE501FE6224700522C0B /* AppDelegate.m in Sources */,
 				D58280541FE6344900A3B313 /* ZKGameStart.m in Sources */,
 			);

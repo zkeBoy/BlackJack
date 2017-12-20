@@ -16,5 +16,7 @@
 #import "ZKGameScreen.h"
 #import "UIImageView+Animation.h"
 #import "ZKCardView.h"
+#import "ZKBankerManager.h"
+#import "ZKHelperView.h"
 
 #endif /* PrefixHeader_pch */

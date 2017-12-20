@@ -18,7 +18,7 @@
 @property (nonatomic, assign) CGSize  playerPosition;
 @property (nonatomic, assign) CGFloat moveLength;
 
-@property (nonatomic, assign) NSInteger playerCoin;
+@property (nonatomic, assign) NSInteger playerCoin; //玩家的金币
 @end
 
 //所有牌的总数
@@ -87,13 +87,14 @@ static NSInteger cards = 52;
     return exist;
 }
 
+#pragma mark - Private Method
 //获取一个随机整数，范围在[from,to]，包括from，包括to
 - (int)getRandomNumber:(int)from to:(int)to{
     return (int)(from + (arc4random() % (to - from + 1)));
 }
 
 #pragma mark Publick Method
-- (void)reAddCards {
+- (void)reCreateCards {
     [self.allCards removeAllObjects];
     [self.existCards removeAllObjects];
     [self loadCards];
@@ -169,6 +170,19 @@ static NSInteger cards = 52;
     NSNumber * num = [NSNumber numberWithInteger:self.playerCoin];
     [userDefaults setObject:num forKey:playerCoinNumKey];
     [userDefaults synchronize];
+}
+
+- (NSInteger)bankerMaxScore {
+    //庄家的最大点数在16-21之间
+    NSInteger max = [self getRandomNumber:16 to:21];
+    return max;
+}
+
+- (void)reloadGame:(NSArray *)cards {
+    [self.allCards addObjectsFromArray:cards];
+    
+    //重置牌的位置
+    [self setManagerDefault];
 }
 
 #pragma mark - lazy init

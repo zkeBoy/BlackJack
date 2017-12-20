@@ -20,8 +20,8 @@
 + (ZKCardsManager *)shareCardsManager;
 
 #pragma mark - 初始化牌
-//重新洗牌
-- (void)reAddCards;
+//重新生成牌
+- (void)reCreateCards;
 //得到所有的牌 一共52种 retuen NSArray
 - (NSArray <ZKCard *>*)getAllCards;
 //取牌方法
@@ -43,4 +43,11 @@
 - (NSInteger)playCoinNum;
 - (void)playerWin:(NSInteger)coin;
 - (void)playerlose:(NSInteger)coin;
+
+#pragma mark - 庄家的最大数
+- (NSInteger)bankerMaxScore;
+
+#pragma mark - 重新开始游戏
+//把已经出现过的牌回收回来,始终保持52张,就不用重新去生成牌
+- (void)reloadGame:(NSArray *)cards;
 @end

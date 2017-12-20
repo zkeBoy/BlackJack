@@ -15,12 +15,12 @@
 @property (nonatomic, strong) UIButton    * moreCardBtn; //要牌
 @property (nonatomic, strong) UILabel     * betlabel;    //现实倍数
 @property (nonatomic, strong) UIImageView * cardView;
-@property (nonatomic, strong) NSMutableArray * allCards;
 @property (nonatomic, strong) UILabel     * bankerScore; //庄家得分
 @property (nonatomic, strong) UILabel     * playerScore; //玩家得分
-
-@property (nonatomic, strong) UILabel     * coinLabel;  //玩家金币
-
+@property (nonatomic, strong) NSMutableArray * allCardViews; //桌面上所有的牌
+@property (nonatomic, strong) NSMutableArray * allCards;
+@property (nonatomic, strong) UILabel     * coinLabel;   //玩家金币
+@property (nonatomic, strong) ZKHelperView* helperView;
 @end
 
 @implementation ZKGameScreen
@@ -28,15 +28,23 @@
 #pragma mark - Button Action
 //下注方法
 - (void)betBtnAction:(UIButton *)button {
-    button.enabled = NO;
+    //判断金币是否>=倍数
+    if (self.coinLabel.text.integerValue<self.betlabel.text.integerValue) {
+        [self.helperView showResultWithType:resultTypeLack hiddenBlock:^{
+            self.helperView = nil;
+        }];
+        return;
+    }
+    
+    [self exchangeBtnEnable:clickTypeBet];
     WEAK_SELF(self);
     //玩家
-    ZKCard * card1 = [ZKCardsManager shareCardsManager].getCard;
-    ZKCard * card2 = [ZKCardsManager shareCardsManager].getCard;
+    ZKCard * card1 = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card1];
+    ZKCard * card2 = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card2];
     ZKCardView * cardView1 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
-    [self addSubview:cardView1]; [self.allCards addObject:cardView1];
-    [self addSubview:cardView2]; [self.allCards addObject:cardView2];
+    [self addSubview:cardView1]; [self.allCardViews addObject:cardView1];
+    [self addSubview:cardView2]; [self.allCardViews addObject:cardView2];
     [cardView1 animateWithDuration:0.5 translationX:-320 translationY:180 completion:nil];
     [cardView2 animateWithDuration:0.7 translationX:-300 translationY:180 completion:^{
         //加载玩家分数
@@ -52,10 +60,10 @@
     }];
     
     //庄家
-    ZKCard * card3 = [ZKCardsManager shareCardsManager].getCard;
+    ZKCard * card3 = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card3];
     ZKCardView * cardView3 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     [self addSubview:cardView3];
-    [self.allCards addObject:cardView3];
+    [self.allCardViews addObject:cardView3];
     [cardView3 animateWithDuration:0.5 translationX:-320 translationY:50 completion:^{
         //加载庄家分数
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -75,13 +83,9 @@
     NSInteger bet = self.betlabel.text.integerValue*2;
     if (coin<bet) {
         //玩家金币不足,提醒用户
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"金币不足"
-                                                             message:@""
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"确定"
-                                                   otherButtonTitles:@"取消",
-                                   nil];
-        [alertView show];
+        [self.helperView showResultWithType:resultTypeLack toView:self hiddenBlock:^{
+            self.helperView = nil;
+        }];
         return;
     }
     self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)bet];
@@ -89,17 +93,86 @@
 
 //停牌方法
 - (void)stopCardBtnAction:(UIButton *)button {
+    [self exchangeBtnEnable:clickTypeStop];
+    WEAK_SELF(self);
+    NSInteger playerAll = self.playerScore.text.integerValue;
     //该庄家要牌了
+    [ZKBankerDefaultManager hitCardWithBlock:^{
+        [ZKCardsManagerDefault bankerAddCard]; //改变位置
+        ZKCard * card = [ZKCardsManagerDefault getCard]; [self.allCards addObject:card];
+        ZKCardView * newCardView = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+        [self addSubview:newCardView];
+        [self.allCardViews addObject:newCardView];
+        [newCardView animateWithDuration:0.5 translation:[ZKCardsManager shareCardsManager].theBankerCardPosition completion:^{
+            NSInteger bScore = [[ZKCardsManager shareCardsManager] getValueByCard:card];
+            NSInteger score = self.bankerScore.text.integerValue;
+            NSInteger bankerAll = bScore+score;
+            weakself.bankerScore.text = [NSString stringWithFormat:@"%ld",(long)bankerAll];
+            
+            //比较结果
+            if (bankerAll==21) {
+                //停止
+                [ZKBankerDefaultManager stopCard];
+                //与玩家比较大小
+                if (bankerAll==playerAll) {//平局
+                    [weakself.helperView showResultWithType:resultTypePush toView:weakself hiddenBlock:^{
+                        //重新游戏
+                        [weakself restartGame];
+                        weakself.helperView = nil;
+                    }];
+                }else {//玩家输了
+                    [weakself.helperView showResultWithType:resultTypeLose toView:weakself hiddenBlock:^{
+                        //重新游戏
+                        [weakself restartGame];
+                        weakself.helperView = nil;
+                    }];
+                    [weakself playerLoseUpdateCoin];
+                }
+            }else if (bankerAll>21){
+                //停止
+                [ZKBankerDefaultManager stopCard];
+                //玩家赢了
+                [weakself.helperView showResultWithType:resultTypeWin toView:weakself hiddenBlock:^{
+                    //重新游戏
+                    [weakself restartGame];
+                    weakself.helperView = nil;
+                }];
+                [weakself playerWinUpdateCoin];
+            }else if (17<bankerAll&&bankerAll<21){
+                //停止
+                [ZKBankerDefaultManager stopCard];
+                //比较大小
+                if (bankerAll==playerAll) {//平局
+                    [weakself.helperView showResultWithType:resultTypePush toView:weakself hiddenBlock:^{
+                        [weakself restartGame];
+                        weakself.helperView = nil;
+                    }];
+                }else if(bankerAll>playerAll){//玩家输了
+                    [weakself.helperView showResultWithType:resultTypeLose toView:weakself hiddenBlock:^{
+                        [weakself restartGame];
+                        weakself.helperView = nil;
+                    }];
+                    [weakself playerLoseUpdateCoin];
+                }else {//玩家赢了
+                    [weakself.helperView showResultWithType:resultTypeWin toView:weakself hiddenBlock:^{
+                        [weakself restartGame];
+                        weakself.helperView = nil;
+                    }];
+                    [weakself playerWinUpdateCoin];
+                }
+            }
+        }];
+    }];
 }
 
 //要牌方法
 - (void)moreCardAction:(UIButton *)button {
     WEAK_SELF(self);
     [[ZKCardsManager shareCardsManager] playerAddCard];
-    ZKCard * card = [ZKCardsManager shareCardsManager].getCard;
+    ZKCard * card = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card];
     ZKCardView * newCard = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     [self addSubview:newCard];
-    [self.allCards addObject:newCard];
+    [self.allCardViews addObject:newCard];
     [newCard animateWithDuration:0.5 translation:[ZKCardsManager shareCardsManager].thePlayerCardPosition completion:^{
         NSInteger s1 = weakself.playerScore.text.integerValue;
         NSInteger s2 = [[ZKCardsManager shareCardsManager] getValueByCard:card];
@@ -109,41 +182,83 @@
         NSInteger player = s1+s2;
         if (player>MaxScore) {
             //玩家输了
-            NSInteger lose = self.betlabel.text.integerValue;
-            [ZKCardsManagerDefault playerlose:lose];
+            [weakself.helperView showResultWithType:resultTypeLose toView:weakself hiddenBlock:^{
+                //重新发牌
+                [weakself restartGame];
+                weakself.helperView = nil;
+            }];
             //更新玩家金币
-            [self updatePlayerCoinNum];
-            
-            //重新发牌
+            [weakself playerLoseUpdateCoin];
             return ;
         }
     }];
 }
 
 - (void)chipButtonAction:(UIButton *)button {
-    switch (button.tag) {
-        case 20:{
-            self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)20];
-        }
-            break;
-        case 100:{
-            self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)100];
-        }
-            break;
-        case 500:{
-            self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)500];
-        }
-            break;
-        case 1000:{
-            self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)1000];
-        }
-            break;
-        default:
-            break;
+    NSInteger tag = button.tag;
+    NSInteger coin = [ZKCardsManagerDefault playCoinNum];
+    if (coin<tag) {
+        //玩家金币不足,提醒用户
+        [self.helperView showResultWithType:resultTypeLack toView:self hiddenBlock:^{
+            self.helperView = nil;
+        }];
+        return;
     }
+    self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)tag];
 }
 
-//- (void)restart
+//重新开始游戏
+- (void)restartGame {
+    for (ZKCardView * card in self.allCardViews) {
+        if ([card isKindOfClass:[ZKCardView class]]) {
+            [card removeFromSuperview];
+        }
+    }
+    self.bankerScore.hidden = YES;
+    self.playerScore.hidden = YES;
+
+    [ZKCardsManagerDefault reloadGame:self.allCards];
+    
+    [self exchangeBtnEnable:clickTypeEnd];
+}
+
+- (void)exchangeBtnEnable:(clickType)type{
+    if (type==clickTypeEnd) {
+        self.betBtn.enabled = YES;
+        self.betBtn.selected = NO;
+        self.doubleBtn.enabled = YES;
+        self.doubleBtn.selected = NO;
+        
+        self.stopCardBtn.enabled = NO;
+        self.stopCardBtn.selected = YES;
+        self.moreCardBtn.enabled = NO;
+        self.moreCardBtn.selected = YES;
+    }
+    
+    if (type==clickTypeBet) {
+        self.betBtn.enabled = NO;
+        self.betBtn.selected = YES;
+        self.doubleBtn.enabled = NO;
+        self.doubleBtn.selected = YES;
+        
+        self.stopCardBtn.enabled = YES;
+        self.stopCardBtn.selected = NO;
+        self.moreCardBtn.enabled = YES;
+        self.moreCardBtn.selected = NO;
+    }
+    
+    if (type==clickTypeStop||type==clickTypeMore) {
+        self.betBtn.enabled = NO;
+        self.betBtn.selected = YES;
+        self.doubleBtn.enabled = NO;
+        self.doubleBtn.selected = YES;
+        
+        self.stopCardBtn.enabled = NO;
+        self.stopCardBtn.selected = YES;
+        self.moreCardBtn.enabled = NO;
+        self.moreCardBtn.selected = YES;
+    }
+}
 
 #pragma mark - setUI
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -239,6 +354,18 @@
     _coinLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
 }
 
+- (void)playerWinUpdateCoin {
+    NSInteger coin = self.betlabel.text.integerValue;
+    [ZKCardsManagerDefault playerWin:coin];
+    [self updatePlayerCoinNum];
+}
+
+- (void)playerLoseUpdateCoin{
+    NSInteger coin = self.betlabel.text.integerValue;
+    [ZKCardsManagerDefault playerlose:coin];
+    [self updatePlayerCoinNum];
+}
+
 #pragma mark - lazy init
 - (UIImageView *)backgrodundView {
     if (!_backgrodundView) {
@@ -309,9 +436,16 @@
     return imageView;
 }
 
+- (NSMutableArray *)allCardViews {
+    if (!_allCardViews) {
+        _allCardViews = [[NSMutableArray alloc] init];
+    }
+    return _allCardViews;
+}
+
 - (NSMutableArray *)allCards {
     if (!_allCards) {
-        _allCards = [[NSMutableArray alloc] init];
+        _allCards = [NSMutableArray array];
     }
     return _allCards;
 }
@@ -344,6 +478,13 @@
         [self updatePlayerCoinNum];
     }
     return _coinLabel;
+}
+
+- (ZKHelperView *)helperView {
+    if (!_helperView) {
+        _helperView = [[ZKHelperView alloc] initWithFrame:CGRectMake(0, S_HEIGHT, S_WIDTH, S_HEIGHT)];
+    }
+    return _helperView;
 }
 
 - (UIButton *)loadButtonAddTarget:(nullable id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents nor:(UIImage *)norImage select:(UIImage *)selectImage {
