@@ -30,7 +30,7 @@
 - (void)betBtnAction:(UIButton *)button {
     //判断金币是否>=倍数
     if (self.coinLabel.text.integerValue<self.betlabel.text.integerValue) {
-        [self.helperView showResultWithType:resultTypeLack hiddenBlock:^{
+        [self.helperView showResultWithType:resultTypeLack toView:self hiddenBlock:^{
             self.helperView = nil;
         }];
         return;
@@ -95,7 +95,21 @@
 - (void)stopCardBtnAction:(UIButton *)button {
     [self exchangeBtnEnable:clickTypeStop];
     WEAK_SELF(self);
+    
     NSInteger playerAll = self.playerScore.text.integerValue;
+    NSInteger banker_ = self.bankerScore.text.integerValue;
+    if(banker_>playerAll){ //有可能玩家停牌时的数就小于庄家
+        //停止
+        [ZKBankerDefaultManager stopCard];
+        //玩家输了
+        [weakself.helperView showResultWithType:resultTypeLose toView:weakself hiddenBlock:^{
+            //重新游戏
+            [weakself restartGame];
+            weakself.helperView = nil;
+        }];
+        [weakself playerLoseUpdateCoin];
+        return ;
+    }
     //该庄家要牌了
     [ZKBankerDefaultManager hitCardWithBlock:^{
         [ZKCardsManagerDefault bankerAddCard]; //改变位置
@@ -108,6 +122,18 @@
             NSInteger score = self.bankerScore.text.integerValue;
             NSInteger bankerAll = bScore+score;
             weakself.bankerScore.text = [NSString stringWithFormat:@"%ld",(long)bankerAll];
+            if((bankerAll>playerAll)&&(bankerAll<=21)){ //发牌过程中发现庄家牌大于玩家牌时
+                //停止
+                [ZKBankerDefaultManager stopCard];
+                //玩家输了
+                [weakself.helperView showResultWithType:resultTypeLose toView:weakself hiddenBlock:^{
+                    //重新游戏
+                    [weakself restartGame];
+                    weakself.helperView = nil;
+                }];
+                [weakself playerLoseUpdateCoin];
+                return ;
+            }
             
             //比较结果
             if (bankerAll==21) {
@@ -138,7 +164,7 @@
                     weakself.helperView = nil;
                 }];
                 [weakself playerWinUpdateCoin];
-            }else if (17<bankerAll&&bankerAll<21){
+            }else if ((15<bankerAll&&bankerAll<21)){
                 //停止
                 [ZKBankerDefaultManager stopCard];
                 //比较大小
@@ -207,7 +233,7 @@
     self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)tag];
 }
 
-//重新开始游戏
+#pragma mark - 重新开始游戏
 - (void)restartGame {
     for (ZKCardView * card in self.allCardViews) {
         if ([card isKindOfClass:[ZKCardView class]]) {
@@ -222,6 +248,7 @@
     [self exchangeBtnEnable:clickTypeEnd];
 }
 
+#pragma mark - 改变Btn状态,切换图片
 - (void)exchangeBtnEnable:(clickType)type{
     if (type==clickTypeEnd) {
         self.betBtn.enabled = YES;
@@ -233,6 +260,8 @@
         self.stopCardBtn.selected = YES;
         self.moreCardBtn.enabled = NO;
         self.moreCardBtn.selected = YES;
+        
+        [self exchangeChipBtnStatus:YES];
     }
     
     if (type==clickTypeBet) {
@@ -245,6 +274,8 @@
         self.stopCardBtn.selected = NO;
         self.moreCardBtn.enabled = YES;
         self.moreCardBtn.selected = NO;
+        
+        [self exchangeChipBtnStatus:NO];
     }
     
     if (type==clickTypeStop||type==clickTypeMore) {
@@ -257,7 +288,25 @@
         self.stopCardBtn.selected = YES;
         self.moreCardBtn.enabled = NO;
         self.moreCardBtn.selected = YES;
+        
+        [self exchangeChipBtnStatus:NO];
     }
+}
+
+- (void)exchangeChipBtnStatus:(BOOL)enable {
+    UIButton * bet20  = [self viewWithTag:20];
+    UIButton * bet100 = [self viewWithTag:100];
+    UIButton * bet500 = [self viewWithTag:500];
+    UIButton * bet1K  = [self viewWithTag:1000];
+    
+    bet20.enabled = enable;
+    bet20.selected = !enable;
+    bet100.enabled = enable;
+    bet100.selected = !enable;
+    bet500.enabled = enable;
+    bet500.selected = !enable;
+    bet1K.enabled = enable;
+    bet1K.selected = !enable;
 }
 
 #pragma mark - setUI
