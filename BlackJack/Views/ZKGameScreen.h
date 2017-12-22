@@ -15,7 +15,12 @@ typedef NS_ENUM(NSInteger, clickType) {
     clickTypeStop = 3,
     clickTypeMore = 4
 };
-
+@protocol ZKGameScreenDelegate;
 @interface ZKGameScreen : UIView
+@property (nonatomic, weak) id <ZKGameScreenDelegate> delegate;
+@end
 
+@protocol ZKGameScreenDelegate <NSObject>
+@optional
+- (void)clickMenu;
 @end

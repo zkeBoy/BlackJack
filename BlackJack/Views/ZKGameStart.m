@@ -24,8 +24,16 @@
     return start;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setUI];
+        self.backgroundColor = [UIColor redColor];
+    }
+    return self;
+}
+
+- (void)setUI {
     [self addSubview:self.backgroundView];
     [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
@@ -34,9 +42,9 @@
     [self addSubview:self.playBtn];
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.bottom.equalTo(self).offset(-80);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(50);
+        make.bottom.equalTo(self).offset(ZScale(-66));
+        make.width.mas_equalTo(ZScale(124));
+        make.height.mas_equalTo(ZScale(64));
     }];
 }
 
@@ -44,7 +52,7 @@
 - (UIImageView *)backgroundView {
     if (!_backgroundView) {
         _backgroundView = [[UIImageView alloc] init];
-        _backgroundView.image = [UIImage imageNamed:@"icon_start"];
+        //_backgroundView.image = [UIImage imageNamed:@"icon_start"];
     }
     return _backgroundView;
 }
@@ -52,7 +60,11 @@
 - (UIButton *)playBtn {
     if (!_playBtn) {
         _playBtn = [[UIButton alloc] init];
+        _playBtn.layer.cornerRadius = ZScale(20);
+        _playBtn.layer.masksToBounds = YES;
         _playBtn.backgroundColor = [UIColor purpleColor];
+        [_playBtn setTitle:@"Play" forState:UIControlStateNormal];
+        [_playBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [_playBtn addTarget:self action:@selector(playGameAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playBtn;

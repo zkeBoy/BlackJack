@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSMutableArray * allCards;
 @property (nonatomic, strong) UILabel     * coinLabel;   //玩家金币
 @property (nonatomic, strong) ZKHelperView* helperView;
+@property (nonatomic, strong) UIButton    * menuBtn; //菜单按钮
+@property (nonatomic, strong) UIButton    * voiceBtn; //声音按钮
 @end
 
 @implementation ZKGameScreen
@@ -233,6 +235,15 @@
     self.betlabel.text = [NSString stringWithFormat:@"%ld",(long)tag];
 }
 
+- (void)selectMenuAction:(UIButton *)btn {
+    [self.delegate clickMenu];
+    [self restartGame];
+}
+
+- (void)exchangeVoiceAction:(UIButton *)btn {
+    self.voiceBtn.selected = !btn.selected;
+}
+
 #pragma mark - 重新开始游戏
 - (void)restartGame {
     for (ZKCardView * card in self.allCardViews) {
@@ -325,38 +336,38 @@
     
     [self addSubview:self.betBtn];
     [self.betBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(W_H);
-        make.left.equalTo(self).offset(100);
-        make.bottom.equalTo(self).offset(-50);
+        make.width.height.mas_equalTo(ZScale(W_H));
+        make.left.equalTo(self).offset(ZScale(100));
+        make.bottom.equalTo(self).offset(ZScale(-50));
     }];
     
     [self addSubview:self.doubleBtn];
     [self.doubleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(W_H);
-        make.left.equalTo(self).offset(200);
-        make.bottom.equalTo(self).offset(-30);
+        make.width.height.mas_equalTo(ZScale(W_H));
+        make.left.equalTo(self).offset(ZScale(200));
+        make.bottom.equalTo(self).offset(ZScale(-30));
     }];
     
     [self addSubview:self.stopCardBtn];
     [self.stopCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(W_H);
-        make.right.equalTo(self).offset(-200);
-        make.bottom.equalTo(self).offset(-30);
+        make.width.height.mas_equalTo(ZScale(W_H));
+        make.right.equalTo(self).offset(ZScale(-200));
+        make.bottom.equalTo(self).offset(ZScale(-30));
     }];
      
     [self addSubview:self.moreCardBtn];
     [self.moreCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(W_H);
-        make.right.equalTo(self).offset(-100);
-        make.bottom.equalTo(self).offset(-50);
+        make.width.height.mas_equalTo(ZScale(W_H));
+        make.right.equalTo(self).offset(ZScale(-100));
+        make.bottom.equalTo(self).offset(ZScale(-50));
     }];
     
     [self addSubview:self.betlabel];
     [self.betlabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.doubleBtn.mas_centerY);
-        make.left.equalTo(self.doubleBtn.mas_right).offset(20);
-        make.right.equalTo(self.stopCardBtn.mas_left).offset(-20);
-        make.height.mas_equalTo(40);
+        make.left.equalTo(self.doubleBtn.mas_right).offset(ZScale(20));
+        make.right.equalTo(self.stopCardBtn.mas_left).offset(ZScale(-20));
+        make.height.mas_equalTo(ZScale(40));
     }];
     
     [self addSubview:self.cardView];
@@ -367,6 +378,20 @@
         make.top.equalTo(self).offset(ZScale(10));
         make.left.equalTo(self.betBtn.mas_left);
         make.width.equalTo(self.betlabel.mas_width);
+    }];
+    
+    [self addSubview:self.menuBtn];
+    [self.menuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(ZScale(10));
+        make.width.height.mas_equalTo(ZScale(30));
+        make.right.equalTo(self).offset(ZScale(-60));
+    }];
+    
+    [self addSubview:self.voiceBtn];
+    [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(ZScale(10));
+        make.width.height.mas_equalTo(ZScale(30));
+        make.right.equalTo(self.menuBtn.mas_left).offset(ZScale(-30));
     }];
 }
 
@@ -379,7 +404,7 @@
     for (NSString * chip in chips) {
         UIButton * button = [[UIButton alloc] init];
         NSNumber * tag = tags[index];
-        button.layer.cornerRadius = W_H/2;
+        button.layer.cornerRadius = ZScale(W_H/2);
         button.layer.masksToBounds = YES;
         button.tag = tag.integerValue;
         button.backgroundColor = [UIColor blackColor];
@@ -390,9 +415,9 @@
         [btns addObject:button];
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(W_H);
-            make.right.equalTo(self).offset(-20);
-            make.top.equalTo(self).offset(60+index*(W_H+20));
+            make.width.height.mas_equalTo(ZScale(W_H));
+            make.right.equalTo(self).offset(ZScale(-20));
+            make.top.equalTo(self).offset(ZScale(70+index*(W_H+20)));
         }];
         index++;
     }
@@ -464,7 +489,7 @@
         _betlabel.textAlignment = NSTextAlignmentCenter;
         _betlabel.layer.borderWidth = 2;
         _betlabel.layer.borderColor = [UIColor yellowColor].CGColor;
-        _betlabel.layer.cornerRadius = 10;
+        _betlabel.layer.cornerRadius = ZScale(10);
         _betlabel.layer.masksToBounds = YES;
         _betlabel.font = [UIFont boldSystemFontOfSize:18];
         _betlabel.text = NSLocalizedString(@"20", nil);
@@ -521,7 +546,7 @@
         _coinLabel.textColor = [UIColor whiteColor];
         _coinLabel.layer.borderWidth = 2;
         _coinLabel.layer.borderColor = [UIColor yellowColor].CGColor;
-        _coinLabel.layer.cornerRadius = 10;
+        _coinLabel.layer.cornerRadius = ZScale(10);
         _coinLabel.layer.masksToBounds = YES;
         _coinLabel.font = [UIFont boldSystemFontOfSize:18];
         [self updatePlayerCoinNum];
@@ -536,9 +561,30 @@
     return _helperView;
 }
 
+- (UIButton *)menuBtn {
+    if (!_menuBtn) {
+        _menuBtn = [[UIButton alloc] init];
+        _menuBtn.backgroundColor = [UIColor clearColor];
+        [_menuBtn setImage:[UIImage imageNamed:@"icon_menu"] forState:UIControlStateNormal];
+        [_menuBtn addTarget:self action:@selector(selectMenuAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _menuBtn;
+}
+
+- (UIButton *)voiceBtn {
+    if (!_voiceBtn) {
+        _voiceBtn = [[UIButton alloc] init];
+        _voiceBtn.backgroundColor = [UIColor clearColor];
+        [_voiceBtn setImage:[UIImage imageNamed:@"icon_voice"] forState:UIControlStateNormal];
+        [_voiceBtn setImage:[UIImage imageNamed:@"icon_voiceClose"] forState:UIControlStateSelected];
+        [_voiceBtn addTarget:self action:@selector(exchangeVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _voiceBtn;
+}
+
 - (UIButton *)loadButtonAddTarget:(nullable id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents nor:(UIImage *)norImage select:(UIImage *)selectImage {
     UIButton * button = [[UIButton alloc] init];
-    button.layer.cornerRadius = W_H/2;
+    button.layer.cornerRadius = ZScale(W_H/2);
     button.layer.masksToBounds = YES;
     button.backgroundColor = [UIColor blackColor];
     [button addTarget:target action:action forControlEvents:controlEvents];
@@ -552,7 +598,7 @@
     score.textColor = [UIColor whiteColor];
     score.textAlignment = NSTextAlignmentCenter;
     score.backgroundColor = [UIColor purpleColor];
-    score.layer.cornerRadius = 15;
+    score.layer.cornerRadius = ZScale(15);
     score.layer.masksToBounds = YES;
     score.font = [UIFont boldSystemFontOfSize:18];
     score.hidden = YES;

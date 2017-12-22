@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<ZKGameScreenDelegate>
 @property (nonatomic, strong) ZKGameStart  * startView;
 @property (nonatomic, strong) ZKGameScreen * gameScreen;
 @end
@@ -25,7 +25,7 @@
 
 - (void)setUpUI {
     [self.view addSubview:self.gameScreen];
-    //[self.view addSubview:self.startView];
+    [self.view addSubview:self.startView];
 }
 
 - (void)hiddenStartView {
@@ -45,6 +45,11 @@
     }];
 }
 
+#pragma mark - ZKGameScreenDelegate
+- (void)clickMenu {
+    [self restoreStartView];
+}
+
 #pragma mark - lazy init
 - (ZKGameStart *)startView {
     if (!_startView) {
@@ -59,6 +64,7 @@
 - (ZKGameScreen *)gameScreen {
     if (!_gameScreen) {
         _gameScreen = [[ZKGameScreen alloc] initWithFrame:self.view.bounds];
+        _gameScreen.delegate = self;
     }
     return _gameScreen;
 }
