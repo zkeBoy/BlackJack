@@ -48,6 +48,7 @@
 #pragma mark - ZKGameScreenDelegate
 - (void)clickMenu {
     [self restoreStartView];
+    [self.startView updatePlayerCoinNum];
 }
 
 #pragma mark - lazy init

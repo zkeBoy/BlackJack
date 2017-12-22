@@ -13,4 +13,6 @@ typedef void(^startPlayBlock)(void);
 @interface ZKGameStart : UIView
 @property (nonatomic,   copy) startPlayBlock playBlock;
 + (ZKGameStart *)addGameStartView:(CGRect)frame andClick:(void(^)(void))clickBlock;
+
+- (void)updatePlayerCoinNum;
 @end

@@ -44,8 +44,8 @@ static NSInteger cards = 52;
 }
 
 - (void)setManagerDefault {
-    self.bankerPosition = CGSizeMake(ZScale(-320), ZScale(50));
-    self.playerPosition = CGSizeMake(ZScale(-300), ZScale(180));
+    self.bankerPosition = CGSizeMake(ZScale(-bEndX), ZScale(bEndY));
+    self.playerPosition = CGSizeMake(ZScale(-pEndX), ZScale(pEndY));
     self.moveLength = ZScale(20);
     NSNumber * coin = [userDefaults objectForKey:playerCoinNumKey];
     self.playerCoin = !coin?1000:coin.integerValue;
@@ -134,7 +134,7 @@ static NSInteger cards = 52;
     CGFloat w = ZScale(119/2);
     CGFloat h = ZScale(165/2);
     CGFloat x = ZScale(S_WIDTH-100-119/2);
-    CGFloat y = ZScale(60);
+    CGFloat y = ZScale(40+20);
     return CGRectMake(x, y, w, h);
 }
 
@@ -143,7 +143,7 @@ static NSInteger cards = 52;
 }
 
 - (void)bankerAddCard{
-    self.bankerPosition = CGSizeMake(self.bankerPosition.width+self.moveLength, ZScale(50));
+    self.bankerPosition = CGSizeMake(self.bankerPosition.width+self.moveLength, ZScale(bEndY));
 }
 
 - (CGSize)thePlayerCardPosition{
@@ -151,7 +151,7 @@ static NSInteger cards = 52;
 }
 
 - (void)playerAddCard {
-    self.playerPosition = CGSizeMake(self.playerPosition.width+self.moveLength, ZScale(180));
+    self.playerPosition = CGSizeMake(self.playerPosition.width+self.moveLength, ZScale(pEndY));
 }
 
 - (NSInteger)playCoinNum {

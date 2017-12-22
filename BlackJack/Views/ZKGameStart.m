@@ -11,9 +11,9 @@
 @property (nonatomic, strong) UIImageView  * backgroundView;
 @property (nonatomic, strong) UIButton     * playBtn;
 @property (nonatomic, strong) UIButton     * voiceBtn; //声音
+@property (nonatomic, strong) UIImageView  * bottomImageView;
 @property (nonatomic, strong) UIImageView  * coinImageView;
 @property (nonatomic, strong) UILabel      * coinLabel;//金币总额
-@property (nonatomic, strong) UIImageView  * bottomImageView;
 @end
 
 @implementation ZKGameStart
@@ -29,6 +29,7 @@
     if (self) {
         [self setUI];
         self.backgroundColor = [UIColor redColor];
+        [self updatePlayerCoinNum];
     }
     return self;
 }
@@ -46,6 +47,31 @@
         make.width.mas_equalTo(ZScale(124));
         make.height.mas_equalTo(ZScale(64));
     }];
+    
+    [self addSubview:self.bottomImageView];
+    [self.bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(ZScale(10));
+        make.left.equalTo(self).offset(S_WIDTH/5);
+        make.width.mas_equalTo(ZScale(S_WIDTH/5+20));
+        make.height.mas_equalTo(ZScale(40));
+    }];
+    
+    [self.bottomImageView addSubview:self.coinImageView];
+    [self.coinImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(ZScale(25));
+        make.left.equalTo(self.bottomImageView).offset(5);
+        make.centerY.equalTo(self.bottomImageView);
+    }];
+    
+    [self.bottomImageView addSubview:self.coinLabel];
+    [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.equalTo(self.bottomImageView);
+        make.right.equalTo(self.bottomImageView).offset(-4);
+    }];
+}
+
+- (void)updatePlayerCoinNum {
+    self.coinLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
 }
 
 #pragma mark - lazy init
@@ -85,6 +111,11 @@
     if (!_bottomImageView) {
         _bottomImageView = [[UIImageView alloc] init];
         _bottomImageView.image = [UIImage imageNamed:@""];
+        _bottomImageView.layer.cornerRadius = 8.0f;
+        _bottomImageView.layer.masksToBounds = YES;
+        _bottomImageView.layer.borderWidth = 1.5f;
+        _bottomImageView.layer.borderColor = [UIColor blackColor].CGColor;
+        _bottomImageView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     }
     return _bottomImageView;
 }
@@ -92,7 +123,7 @@
 - (UIImageView *)coinImageView {
     if (!_coinImageView) {
         _coinImageView = [[UIImageView alloc] init];
-        _coinImageView.image = [UIImage imageNamed:@""];
+        _coinImageView.image = [UIImage imageNamed:@"icon_coin"];
     }
     return _coinImageView;
 }
@@ -103,7 +134,7 @@
         _coinLabel.backgroundColor = [UIColor clearColor];
         _coinLabel.textColor = [UIColor whiteColor];
         _coinLabel.textAlignment = NSTextAlignmentRight;
-        _coinLabel.font = [UIFont systemFontOfSize:16];
+        _coinLabel.font = [UIFont boldSystemFontOfSize:16];
     }
     return _coinLabel;
 }

@@ -10,6 +10,12 @@
 #import <Foundation/Foundation.h>
 #import "ZKCard.h"
 
+#define bEndX 320
+#define bEndY 30
+
+#define pEndX 300
+#define pEndY 160
+
 #define ZKCardsManagerDefault [ZKCardsManager shareCardsManager]
 
 #define MaxScore 21
