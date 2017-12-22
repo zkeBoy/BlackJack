@@ -23,6 +23,7 @@
 		D601AD4FE7CC9C42205D1174 /* libPods-BlackJack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */; };
 		E28197341FED085100FE9473 /* setCard.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28197331FED085000FE9473 /* setCard.wav */; };
 		E28197371FED08FF00FE9473 /* ZKVoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E28197361FED08FF00FE9473 /* ZKVoiceManager.m */; };
+		E28197391FED0D7C00FE9473 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28197381FED0D7B00FE9473 /* AudioToolbox.framework */; };
 		E2D54EC71FE900E200BC2ACE /* icon_Card_Select.png in Resources */ = {isa = PBXBuildFile; fileRef = E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */; };
 		E2D54ECA1FE9068800BC2ACE /* ZKCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54EC91FE9068800BC2ACE /* ZKCardView.m */; };
 		E2D54F291FEA469700BC2ACE /* ZKBankerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54F281FEA469700BC2ACE /* ZKBankerManager.m */; };
@@ -60,6 +61,7 @@
 		E28197331FED085000FE9473 /* setCard.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = setCard.wav; sourceTree = "<group>"; };
 		E28197351FED08FF00FE9473 /* ZKVoiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKVoiceManager.h; sourceTree = "<group>"; };
 		E28197361FED08FF00FE9473 /* ZKVoiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKVoiceManager.m; sourceTree = "<group>"; };
+		E28197381FED0D7B00FE9473 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E2D54EC61FE900E100BC2ACE /* icon_Card_Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_Card_Select.png; sourceTree = "<group>"; };
 		E2D54EC81FE9068800BC2ACE /* ZKCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKCardView.h; sourceTree = "<group>"; };
 		E2D54EC91FE9068800BC2ACE /* ZKCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKCardView.m; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28197391FED0D7C00FE9473 /* AudioToolbox.framework in Frameworks */,
 				D601AD4FE7CC9C42205D1174 /* libPods-BlackJack.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +96,7 @@
 		94FCE80D5A82722596E34FEC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E28197381FED0D7B00FE9473 /* AudioToolbox.framework */,
 				DA89A2189F150FE4E0A8FCAD /* libPods-BlackJack.a */,
 			);
 			name = Frameworks;

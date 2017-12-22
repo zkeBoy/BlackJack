@@ -20,6 +20,6 @@ typedef NS_ENUM(NSInteger, voiceType) {
 
 - (void)closeVoice;
 - (void)openVoice;
-- (void)playVoiceWithFilePath:(NSString *)path;
 - (void)playVoiceWithType:(voiceType)type;
+- (void)playVoiceWithFilePath:(NSURL *)path;
 @end

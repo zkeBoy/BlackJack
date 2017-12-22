@@ -9,7 +9,7 @@
 #import "ZKVoiceManager.h"
 
 @interface ZKVoiceManager()
-
+@property (nonatomic, copy) NSString * voiceName;
 @end
 
 @implementation ZKVoiceManager
@@ -21,6 +21,28 @@
         manager = [[ZKVoiceManager alloc] init];
     });
     return manager;
+}
+
+#pragma mark - Publick
+- (void)closeVoice{
+    
+}
+
+- (void)openVoice{
+    
+}
+
+- (void)playVoiceWithType:(voiceType)type{
+    
+}
+
+- (void)playVoiceWithFilePath:(NSURL *)path{
+    
+}
+
+- (NSURL *)appendFilePathWithName:(NSString *)voiceName {
+    NSString * path = [[NSBundle mainBundle] pathForResource:voiceName ofType:nil];
+    return [NSURL URLWithString:path];
 }
 
 @end
