@@ -49,8 +49,8 @@
     ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     [self addSubview:cardView1]; [self.allCardViews addObject:cardView1];
     [self addSubview:cardView2]; [self.allCardViews addObject:cardView2];
-    [cardView1 animateWithDuration:0.5 translationX:-pEndX translationY:pEndY completion:nil];
-    [cardView2 animateWithDuration:0.7 translationX:-bEndX translationY:pEndY completion:^{
+    [cardView1 animateWithDuration:0.5 translationX:-bEndX translationY:pEndY completion:nil];
+    [cardView2 animateWithDuration:0.7 translationX:-pEndX translationY:pEndY completion:^{
         //加载玩家分数
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger s1 = [[ZKCardsManager shareCardsManager] getValueByCard:card1];

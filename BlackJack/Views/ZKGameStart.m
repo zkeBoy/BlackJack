@@ -68,6 +68,13 @@
         make.top.left.bottom.equalTo(self.bottomImageView);
         make.right.equalTo(self.bottomImageView).offset(-4);
     }];
+    
+    [self addSubview:self.voiceBtn];
+    [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(ZScale(10));
+        make.width.height.mas_offset(ZScale(30));
+        make.right.equalTo(self).offset(ZScale(-120));
+    }];
 }
 
 - (void)updatePlayerCoinNum {
@@ -99,9 +106,8 @@
 - (UIButton *)voiceBtn {
     if (!_voiceBtn) {
         _voiceBtn = [[UIButton alloc] init];
-        _voiceBtn.backgroundColor = [UIColor redColor];
-        [_voiceBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_voiceBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+        [_voiceBtn setImage:[UIImage imageNamed:@"icon_voice"] forState:UIControlStateNormal];
+        [_voiceBtn setImage:[UIImage imageNamed:@"icon_voiceClose"] forState:UIControlStateSelected];
         [_voiceBtn addTarget:self action:@selector(switchVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _voiceBtn;
@@ -148,6 +154,7 @@
 
 //声音开关
 - (void)switchVoiceAction:(UIButton *)btn {
+    self.voiceBtn.selected = !btn.selected;
     
 }
 

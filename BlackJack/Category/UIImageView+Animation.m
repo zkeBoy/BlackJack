@@ -19,7 +19,9 @@
     [UIView animateWithDuration:1 animations:^{
         imageView.transform = CGAffineTransformMakeScale(1.5, 1.5);
     } completion:^(BOOL finished) {
-        imageView.transform = CGAffineTransformIdentity;
+        [UIView animateWithDuration:0.5 animations:^{
+            imageView.transform = CGAffineTransformIdentity;
+        }];
         if (completionHandler) {
             completionHandler ();
         }

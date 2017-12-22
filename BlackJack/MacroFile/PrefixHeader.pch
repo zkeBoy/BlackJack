@@ -18,5 +18,5 @@
 #import "ZKCardView.h"
 #import "ZKBankerManager.h"
 #import "ZKHelperView.h"
-
+#import "ZKVoiceManager.h"
 #endif /* PrefixHeader_pch */
