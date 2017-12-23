@@ -39,7 +39,8 @@
         }];
         return;
     }
-    
+    //发牌的音效
+    [ZKVoiceDefauleManager playVoiceWithType:voiceTypeCard];
     [self exchangeBtnEnable:clickTypeBet];
     WEAK_SELF(self);
     //玩家
@@ -116,6 +117,9 @@
     }
     //该庄家要牌了
     [ZKBankerDefaultManager hitCardWithBlock:^{
+        //发牌的音效
+        [ZKVoiceDefauleManager playVoiceWithType:voiceTypeCard];
+        
         [ZKCardsManagerDefault bankerAddCard]; //改变位置
         ZKCard * card = [ZKCardsManagerDefault getCard]; [self.allCards addObject:card];
         ZKCardView * newCardView = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
@@ -197,6 +201,8 @@
 
 //要牌方法
 - (void)moreCardAction:(UIButton *)button {
+    //发牌的音效
+    [ZKVoiceDefauleManager playVoiceWithType:voiceTypeCard];
     WEAK_SELF(self);
     [[ZKCardsManager shareCardsManager] playerAddCard];
     ZKCard * card = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card];
