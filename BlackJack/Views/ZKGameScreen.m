@@ -50,8 +50,8 @@
     ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     [self addSubview:cardView1]; [self.allCardViews addObject:cardView1];
     [self addSubview:cardView2]; [self.allCardViews addObject:cardView2];
-    [cardView1 animateWithDuration:0.5 translationX:-bEndX translationY:pEndY completion:nil];
-    [cardView2 animateWithDuration:0.7 translationX:-pEndX translationY:pEndY completion:^{
+    [cardView1 animateWithDuration:0.5 translationX:ZScale(-bEndX) translationY:ZScale(pEndY) completion:nil];
+    [cardView2 animateWithDuration:0.7 translationX:ZScale(-pEndX) translationY:ZScale(pEndY) completion:^{
         //加载玩家分数
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger s1 = [[ZKCardsManager shareCardsManager] getValueByCard:card1];
@@ -59,7 +59,7 @@
             NSInteger pScore = s1+s2;
             weakself.playerScore.text = [NSString stringWithFormat:@"%ld",(long)pScore];
             weakself.playerScore.hidden = NO;
-            weakself.playerScore.frame = CGRectMake(ZScale((S_WIDTH-100-119/2-335)), ZScale(220+165/4-15), ZScale(30), ZScale(30));
+            weakself.playerScore.frame = CGRectMake(ZScale(240), ZScale(248), ZScale(30), ZScale(30));
             [weakself addSubview:weakself.playerScore];
         });
     }];
@@ -69,13 +69,13 @@
     ZKCardView * cardView3 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
     [self addSubview:cardView3];
     [self.allCardViews addObject:cardView3];
-    [cardView3 animateWithDuration:0.5 translationX:-bEndX translationY:bEndY completion:^{
+    [cardView3 animateWithDuration:0.5 translationX:ZScale(-bEndX) translationY:ZScale(bEndY) completion:^{
         //加载庄家分数
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger bScore = [[ZKCardsManager shareCardsManager] getValueByCard:card3];
             weakself.bankerScore.text = [NSString stringWithFormat:@"%ld",(long)bScore];
             weakself.bankerScore.hidden = NO;
-            weakself.bankerScore.frame = CGRectMake(ZScale((S_WIDTH-100-119/2-335)), ZScale(90+165/4-15), ZScale(30), ZScale(30));
+            weakself.bankerScore.frame = CGRectMake(ZScale(240), ZScale(118), ZScale(30), ZScale(30));
             [weakself addSubview:weakself.bankerScore];
         });
     }];
@@ -226,6 +226,15 @@
             //更新玩家金币
             [weakself playerLoseUpdateCoin];
             return ;
+        }else if (player==MaxScore) {
+            //玩家赢了
+            [weakself.helperView showResultWithType:resultTypeWin toView:weakself hiddenBlock:^{
+                //重新发牌
+                [weakself restartGame];
+                weakself.helperView = nil;
+            }];
+            [weakself playerWinUpdateCoin];
+            return;
         }
     }];
 }
@@ -651,7 +660,7 @@
     score.backgroundColor = [UIColor purpleColor];
     score.layer.cornerRadius = ZScale(15);
     score.layer.masksToBounds = YES;
-    score.font = [UIFont boldSystemFontOfSize:18];
+    score.font = [UIFont boldSystemFontOfSize:ZScale(18)];
     score.hidden = YES;
     return score;
 }

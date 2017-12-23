@@ -16,7 +16,7 @@
 
 #define WEAK_SELF(obj) __weak typeof(obj) weak##obj = obj;
 #define W_H 50
-#define ZScale(s) (s*(S_WIDTH/736))
+#define ZScale(s) ((s)*(S_WIDTH/736))
 
 #define userDefaults [NSUserDefaults standardUserDefaults]
 
