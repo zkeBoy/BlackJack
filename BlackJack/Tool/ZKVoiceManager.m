@@ -26,13 +26,18 @@
 #pragma mark - Publick
 - (void)closeVoice{
     //关闭声音就是将静音
+    self.close = YES;
 }
 
 - (void)openVoice{
     //关闭静音
+    self.close = NO;
 }
 
 - (void)playVoiceWithType:(voiceType)type{
+    if (self.close) {
+        return;
+    }
     if (type==voiceTypeCard) { //发牌的声音
         [self playVoiceWithName:@"setCard.wav"];
     }else if (type==voiceTypeWin) { //赢了的声音

@@ -29,6 +29,7 @@
 }
 
 - (void)hiddenStartView {
+    [self.gameScreen compareVoiceBtnStatus];
     [UIView animateWithDuration:0.25 animations:^{
         self.startView.transform = CGAffineTransformTranslate(self.startView.transform, 0, S_HEIGHT);
     }completion:^(BOOL finished) {

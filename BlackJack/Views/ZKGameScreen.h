@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger, clickType) {
 @protocol ZKGameScreenDelegate;
 @interface ZKGameScreen : UIView
 @property (nonatomic, weak) id <ZKGameScreenDelegate> delegate;
+
+- (void)compareVoiceBtnStatus;
 @end
 
 @protocol ZKGameScreenDelegate <NSObject>

@@ -250,6 +250,7 @@
 
 - (void)exchangeVoiceAction:(UIButton *)btn {
     self.voiceBtn.selected = !btn.selected;
+    ZKVoiceDefauleManager.close = self.voiceBtn.selected;
 }
 
 #pragma mark - 重新开始游戏
@@ -450,6 +451,7 @@
 }
 
 - (void)playerWinUpdateCoin {
+    [ZKVoiceDefauleManager playVoiceWithType:voiceTypeWin];
     NSInteger coin = self.betlabel.text.integerValue;
     [ZKCardsManagerDefault playerWin:coin];
     [UIImageView imageView:self.coinImageView animationWithType:ZKAnimationTypeScale completionHandler:^{
@@ -458,11 +460,17 @@
 }
 
 - (void)playerLoseUpdateCoin{
+    [ZKVoiceDefauleManager playVoiceWithType:voiceTypelose];
     NSInteger coin = self.betlabel.text.integerValue;
     [ZKCardsManagerDefault playerlose:coin];
     [UIImageView imageView:self.coinImageView animationWithType:ZKAnimationTypeScale completionHandler:^{
         [self updatePlayerCoinNum];
     }];
+}
+
+#pragma mark - Publick
+- (void)compareVoiceBtnStatus {
+    self.voiceBtn.selected = ZKVoiceDefauleManager.close;
 }
 
 #pragma mark - lazy init
@@ -620,6 +628,7 @@
         [_voiceBtn setImage:[UIImage imageNamed:@"icon_voice"] forState:UIControlStateNormal];
         [_voiceBtn setImage:[UIImage imageNamed:@"icon_voiceClose"] forState:UIControlStateSelected];
         [_voiceBtn addTarget:self action:@selector(exchangeVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
+        _voiceBtn.selected = ZKVoiceDefauleManager.close;
     }
     return _voiceBtn;
 }

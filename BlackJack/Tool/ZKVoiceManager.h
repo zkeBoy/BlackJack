@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, voiceType) {
 
 #define ZKVoiceDefauleManager [ZKVoiceManager shareVoiceManager]
 @interface ZKVoiceManager : NSObject
+@property (nonatomic, assign) BOOL close;
+
 + (ZKVoiceManager *)shareVoiceManager;
 
 - (void)closeVoice;

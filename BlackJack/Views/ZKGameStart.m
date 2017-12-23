@@ -79,6 +79,8 @@
 
 - (void)updatePlayerCoinNum {
     self.coinLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
+    
+    self.voiceBtn.selected = ZKVoiceDefauleManager.close;
 }
 
 #pragma mark - lazy init
@@ -155,7 +157,7 @@
 //声音开关
 - (void)switchVoiceAction:(UIButton *)btn {
     self.voiceBtn.selected = !btn.selected;
-    
+    ZKVoiceDefauleManager.close = self.voiceBtn.selected;
 }
 
 /*
