@@ -227,13 +227,7 @@
             [weakself playerLoseUpdateCoin];
             return ;
         }else if (player==MaxScore) {
-            //玩家赢了
-            [weakself.helperView showResultWithType:resultTypeWin toView:weakself hiddenBlock:^{
-                //重新发牌
-                [weakself restartGame];
-                weakself.helperView = nil;
-            }];
-            [weakself playerWinUpdateCoin];
+            [weakself stopCardBtnAction:nil];
             return;
         }
     }];
