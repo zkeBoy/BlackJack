@@ -46,8 +46,8 @@
     //玩家
     ZKCard * card1 = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card1];
     ZKCard * card2 = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card2];
-    ZKCardView * cardView1 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
-    ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+    ZKCardView * cardView1 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card1.cardImage];
+    ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card2.cardImage];
     [self addSubview:cardView1]; [self.allCardViews addObject:cardView1];
     [self addSubview:cardView2]; [self.allCardViews addObject:cardView2];
     [cardView1 animateWithDuration:0.5 translationX:ZScale(-bEndX) translationY:ZScale(pEndY) completion:nil];
@@ -66,7 +66,7 @@
     
     //庄家
     ZKCard * card3 = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card3];
-    ZKCardView * cardView3 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+    ZKCardView * cardView3 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card3.cardImage];
     [self addSubview:cardView3];
     [self.allCardViews addObject:cardView3];
     [cardView3 animateWithDuration:0.5 translationX:ZScale(-bEndX) translationY:ZScale(bEndY) completion:^{
@@ -122,7 +122,7 @@
         
         [ZKCardsManagerDefault bankerAddCard]; //改变位置
         ZKCard * card = [ZKCardsManagerDefault getCard]; [self.allCards addObject:card];
-        ZKCardView * newCardView = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+        ZKCardView * newCardView = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card.cardImage];
         [self addSubview:newCardView];
         [self.allCardViews addObject:newCardView];
         [newCardView animateWithDuration:0.5 translation:[ZKCardsManager shareCardsManager].theBankerCardPosition completion:^{
@@ -206,7 +206,7 @@
     WEAK_SELF(self);
     [[ZKCardsManager shareCardsManager] playerAddCard];
     ZKCard * card = [ZKCardsManager shareCardsManager].getCard; [self.allCards addObject:card];
-    ZKCardView * newCard = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:@"icon_Card_Select"];
+    ZKCardView * newCard = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card.cardImage];
     [self addSubview:newCard];
     [self.allCardViews addObject:newCard];
     [newCard animateWithDuration:0.5 translation:[ZKCardsManager shareCardsManager].thePlayerCardPosition completion:^{
@@ -338,6 +338,7 @@
     if (self) {
         [self setUI];
         [self setChipButtons];
+        [self exchangeBtnEnable:clickTypeEnd];
     }
     return self;
 }
@@ -424,19 +425,15 @@
 - (void)setChipButtons{
     NSInteger index = 0;
     NSArray * tags = @[@20,@100,@500,@1000];
-    NSArray * chips = @[@"20",@"100",@"500",@"1K"];
+    NSArray * chips = @[@"chip_20",@"chip_100",@"chip_500",@"chip_1K"];
     NSMutableArray * btns = [NSMutableArray array];
     for (NSString * chip in chips) {
         UIButton * button = [[UIButton alloc] init];
         NSNumber * tag = tags[index];
-        button.layer.cornerRadius = ZScale(W_H/2);
-        button.layer.masksToBounds = YES;
         button.tag = tag.integerValue;
-        button.backgroundColor = [UIColor blackColor];
-        [button setTitle:chip forState:UIControlStateNormal];
         [button addTarget:self action:@selector(chipButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:chip] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:chip] forState:UIControlStateSelected];
         [btns addObject:button];
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -480,39 +477,34 @@
 - (UIImageView *)backgrodundView {
     if (!_backgrodundView) {
         _backgrodundView = [[UIImageView alloc] init];
-        _backgrodundView.image = [UIImage imageNamed:@""];
-        _backgrodundView.backgroundColor = [UIColor greenColor];
+        _backgrodundView.image = [UIImage imageNamed:@"icon_Game_Screen"];
     }
     return _backgrodundView;
 }
 
 - (UIButton *)betBtn {
     if (!_betBtn) {
-        _betBtn = [self loadButtonAddTarget:self action:@selector(betBtnAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@""] select:[UIImage imageNamed:@""]];
-        [_betBtn setTitle:NSLocalizedString(@"下注", nil) forState:UIControlStateNormal];
+        _betBtn = [self loadButtonAddTarget:self action:@selector(betBtnAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@"icon_bet"] select:[UIImage imageNamed:@"icon_bet"]];
     }
     return _betBtn;
 }
 
 - (UIButton *)doubleBtn {
     if (!_doubleBtn) {
-        _doubleBtn = [self loadButtonAddTarget:self action:@selector(doubleBtnAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@""] select:[UIImage imageNamed:@""]];
-        [_doubleBtn setTitle:NSLocalizedString(@"双倍", nil) forState:UIControlStateNormal];
+        _doubleBtn = [self loadButtonAddTarget:self action:@selector(doubleBtnAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@"icon_double"] select:[UIImage imageNamed:@"icon_double"]];
     }
     return _doubleBtn;
 }
 
 - (UIButton *)stopCardBtn {
     if (!_stopCardBtn) {
-        _stopCardBtn = [self loadButtonAddTarget:self action:@selector(stopCardBtnAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@""] select:[UIImage imageNamed:@""]];
-        [_stopCardBtn setTitle:NSLocalizedString(@"停牌", nil) forState:UIControlStateNormal];
+        _stopCardBtn = [self loadButtonAddTarget:self action:@selector(stopCardBtnAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@"icon_stop"] select:[UIImage imageNamed:@"icon_stop"]];
     }
     return _stopCardBtn;
 }
 - (UIButton *)moreCardBtn {
     if (!_moreCardBtn) {
-        _moreCardBtn = [self loadButtonAddTarget:self action:@selector(moreCardAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@""] select:[UIImage imageNamed:@""]];
-        [_moreCardBtn setTitle:NSLocalizedString(@"要牌", nil) forState:UIControlStateNormal];
+        _moreCardBtn = [self loadButtonAddTarget:self action:@selector(moreCardAction:) forControlEvents:UIControlEventTouchUpInside nor:[UIImage imageNamed:@"icon_more_cards"] select:[UIImage imageNamed:@"icon_more_cards"]];
     }
     return _moreCardBtn;
 }
@@ -542,7 +534,7 @@
 }
 
 - (UIImageView *)cardDefaultView {
-    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_Card"]];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"puke_bj"]];
     return imageView;
 }
 
@@ -617,8 +609,7 @@
 - (UIButton *)menuBtn {
     if (!_menuBtn) {
         _menuBtn = [[UIButton alloc] init];
-        _menuBtn.backgroundColor = [UIColor clearColor];
-        [_menuBtn setImage:[UIImage imageNamed:@"icon_menu"] forState:UIControlStateNormal];
+        [_menuBtn setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
         [_menuBtn addTarget:self action:@selector(selectMenuAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _menuBtn;
@@ -638,9 +629,6 @@
 
 - (UIButton *)loadButtonAddTarget:(nullable id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents nor:(UIImage *)norImage select:(UIImage *)selectImage {
     UIButton * button = [[UIButton alloc] init];
-    button.layer.cornerRadius = ZScale(W_H/2);
-    button.layer.masksToBounds = YES;
-    button.backgroundColor = [UIColor blackColor];
     [button addTarget:target action:action forControlEvents:controlEvents];
     [button setImage:norImage forState:UIControlStateNormal];
     [button setImage:selectImage forState:UIControlStateSelected];

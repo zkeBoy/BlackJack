@@ -15,7 +15,7 @@
         self.backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
         self.backView.frame = self.bounds;
         
-        self.frontView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_Card"]];
+        self.frontView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"puke_bj"]];
         self.frontView.frame = self.bounds;
         [self addSubview:self.frontView];
     }

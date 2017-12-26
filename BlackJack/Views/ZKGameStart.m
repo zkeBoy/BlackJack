@@ -30,6 +30,7 @@
         [self setUI];
         self.backgroundColor = [UIColor redColor];
         [self updatePlayerCoinNum];
+        [self hiddenCoinLabel];
     }
     return self;
 }
@@ -79,15 +80,21 @@
 
 - (void)updatePlayerCoinNum {
     self.coinLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
-    
     self.voiceBtn.selected = ZKVoiceDefauleManager.close;
+}
+
+- (void)hiddenCoinLabel {
+    self.bottomImageView.hidden = YES;
+    self.coinImageView.hidden = YES;
+    self.coinLabel.hidden = YES;
+    self.voiceBtn.hidden = YES;
 }
 
 #pragma mark - lazy init
 - (UIImageView *)backgroundView {
     if (!_backgroundView) {
         _backgroundView = [[UIImageView alloc] init];
-        //_backgroundView.image = [UIImage imageNamed:@"icon_start"];
+        _backgroundView.image = [UIImage imageNamed:@"icon_Start_Background"];
     }
     return _backgroundView;
 }
@@ -96,10 +103,10 @@
     if (!_playBtn) {
         _playBtn = [[UIButton alloc] init];
         _playBtn.layer.cornerRadius = ZScale(20);
-        _playBtn.layer.masksToBounds = YES;
-        _playBtn.backgroundColor = [UIColor purpleColor];
-        [_playBtn setTitle:@"Play" forState:UIControlStateNormal];
-        [_playBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        //_playBtn.layer.masksToBounds = YES;
+        //_playBtn.backgroundColor = [UIColor purpleColor];
+        //[_playBtn setTitle:@"Play" forState:UIControlStateNormal];
+        [_playBtn setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
         [_playBtn addTarget:self action:@selector(playGameAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playBtn;

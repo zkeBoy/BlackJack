@@ -127,6 +127,7 @@ static NSInteger cards = 52;
     }else if ([card.cardNum isEqualToString:@"J"]||[card.cardNum isEqualToString:@"Q"]||[card.cardNum isEqualToString:@"K"]) {
         return 10;
     }
+    NSLog(@"card.cardCombination:%@",card.cardCombination);
     return card.cardNum.integerValue;
 }
 
