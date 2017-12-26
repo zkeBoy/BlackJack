@@ -48,11 +48,15 @@
 - (void)setCoin {
     self.backgroundView.image = [UIImage imageNamed:@"icon_money"];
     self.scoreLabel.textAlignment = NSTextAlignmentLeft;
+    NSInteger offL = 80;
+    if(S_WIDTH==568){
+        offL = 64;
+    }
     [self.scoreLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(ZScale(80));
+        make.left.equalTo(self).offset(ZScale(offL));
         make.centerY.equalTo(self);
         make.width.equalTo(self.scoreLabel);
-        make.height.mas_equalTo(20);
+        make.height.equalTo(self);
     }];
 }
 
