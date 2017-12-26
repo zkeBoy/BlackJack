@@ -19,5 +19,6 @@
 #import "ZKBankerManager.h"
 #import "ZKHelperView.h"
 #import "ZKVoiceManager.h"
-#import <AudioToolbox/AudioToolbox.h>  
+#import <AudioToolbox/AudioToolbox.h>
+#import "ZKScoreView.h"
 #endif /* PrefixHeader_pch */

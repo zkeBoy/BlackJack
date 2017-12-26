@@ -15,8 +15,8 @@
 @property (nonatomic, strong) UIButton    * moreCardBtn; //要牌
 @property (nonatomic, strong) UILabel     * betlabel;    //现实倍数
 @property (nonatomic, strong) UIImageView * cardView;
-@property (nonatomic, strong) UILabel     * bankerScore; //庄家得分
-@property (nonatomic, strong) UILabel     * playerScore; //玩家得分
+@property (nonatomic, strong) ZKScoreView     * bankerScore; //庄家得分
+@property (nonatomic, strong) ZKScoreView     * playerScore; //玩家得分
 @property (nonatomic, strong) NSMutableArray * allCardViews; //桌面上所有的牌
 @property (nonatomic, strong) NSMutableArray * allCards;
 @property (nonatomic, strong) UIImageView * coinMainView;
@@ -57,7 +57,7 @@
             NSInteger s1 = [[ZKCardsManager shareCardsManager] getValueByCard:card1];
             NSInteger s2 = [[ZKCardsManager shareCardsManager] getValueByCard:card2];
             NSInteger pScore = s1+s2;
-            weakself.playerScore.text = [NSString stringWithFormat:@"%ld",(long)pScore];
+            weakself.playerScore.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)pScore];
             weakself.playerScore.hidden = NO;
             weakself.playerScore.frame = CGRectMake(ZScale(240), ZScale(248), ZScale(30), ZScale(30));
             [weakself addSubview:weakself.playerScore];
@@ -73,7 +73,7 @@
         //加载庄家分数
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger bScore = [[ZKCardsManager shareCardsManager] getValueByCard:card3];
-            weakself.bankerScore.text = [NSString stringWithFormat:@"%ld",(long)bScore];
+            weakself.bankerScore.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)bScore];
             weakself.bankerScore.hidden = NO;
             weakself.bankerScore.frame = CGRectMake(ZScale(240), ZScale(118), ZScale(30), ZScale(30));
             [weakself addSubview:weakself.bankerScore];
@@ -101,8 +101,8 @@
     [self exchangeBtnEnable:clickTypeStop];
     WEAK_SELF(self);
     
-    NSInteger playerAll = self.playerScore.text.integerValue;
-    NSInteger banker_ = self.bankerScore.text.integerValue;
+    NSInteger playerAll = self.playerScore.scoreLabel.text.integerValue;
+    NSInteger banker_ = self.bankerScore.scoreLabel.text.integerValue;
     if(banker_>playerAll){ //有可能玩家停牌时的数就小于庄家
         //停止
         [ZKBankerDefaultManager stopCard];
@@ -127,9 +127,9 @@
         [self.allCardViews addObject:newCardView];
         [newCardView animateWithDuration:0.5 translation:[ZKCardsManager shareCardsManager].theBankerCardPosition completion:^{
             NSInteger bScore = [[ZKCardsManager shareCardsManager] getValueByCard:card];
-            NSInteger score = self.bankerScore.text.integerValue;
+            NSInteger score = self.bankerScore.scoreLabel.text.integerValue;
             NSInteger bankerAll = bScore+score;
-            weakself.bankerScore.text = [NSString stringWithFormat:@"%ld",(long)bankerAll];
+            weakself.bankerScore.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)bankerAll];
             if((bankerAll>playerAll)&&(bankerAll<=21)){ //发牌过程中发现庄家牌大于玩家牌时
                 //停止
                 [ZKBankerDefaultManager stopCard];
@@ -210,9 +210,9 @@
     [self addSubview:newCard];
     [self.allCardViews addObject:newCard];
     [newCard animateWithDuration:0.5 translation:[ZKCardsManager shareCardsManager].thePlayerCardPosition completion:^{
-        NSInteger s1 = weakself.playerScore.text.integerValue;
+        NSInteger s1 = weakself.playerScore.scoreLabel.text.integerValue;
         NSInteger s2 = [[ZKCardsManager shareCardsManager] getValueByCard:card];
-        weakself.playerScore.text = [NSString stringWithFormat:@"%ld",(long)(s1+s2)];
+        weakself.playerScore.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)(s1+s2)];
         
         //比较玩家是否超过21
         NSInteger player = s1+s2;
@@ -552,14 +552,14 @@
     return _allCards;
 }
 
-- (UILabel *)bankerScore {
+- (ZKScoreView *)bankerScore {
     if (!_bankerScore) {
         _bankerScore = [self loadScoreLabel];
     }
     return _bankerScore;
 }
 
-- (UILabel *)playerScore {
+- (ZKScoreView *)playerScore {
     if (!_playerScore) {
         _playerScore = [self loadScoreLabel];
     }
@@ -635,14 +635,8 @@
     return button;
 }
 
-- (UILabel *)loadScoreLabel {
-    UILabel * score = [[UILabel alloc] init];
-    score.textColor = [UIColor whiteColor];
-    score.textAlignment = NSTextAlignmentCenter;
-    score.backgroundColor = [UIColor purpleColor];
-    score.layer.cornerRadius = ZScale(15);
-    score.layer.masksToBounds = YES;
-    score.font = [UIFont boldSystemFontOfSize:ZScale(18)];
+- (ZKScoreView *)loadScoreLabel {
+    ZKScoreView * score = [[ZKScoreView alloc] init];
     score.hidden = YES;
     return score;
 }
