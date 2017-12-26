@@ -39,13 +39,13 @@
         return;
     }
     if (type==voiceTypeCard) { //发牌的声音
-        [self playVoiceWithName:@"setCard.wav"];
+        [self playVoiceWithName:@"selectedbet.wav"];
     }else if (type==voiceTypeWin) { //赢了的声音
-        
+        [self playVoiceWithName:@"pwin_money.wav"];
     }else if (type==voiceTypelose) { //输了的声音
-        
+        [self playVoiceWithName:@"plose_money.wav"];
     }else if (type==voiceTypePush) { //平局的声音
-        
+        [self playVoiceWithName:@"postPoker.wav"];
     }
 }
 
@@ -65,7 +65,7 @@
 }
 
 void soundCompleteCallback(SystemSoundID soundID,void * clientData){
-    NSLog(@"播放完成...");
+    //NSLog(@"播放完成...");
 }
 
 - (NSURL *)appendFilePathWithName:(NSString *)voiceName {

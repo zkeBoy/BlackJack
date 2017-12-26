@@ -72,7 +72,14 @@
 		E23DD1061FF1E5DF005E866E /* plum_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E23DD0F91FF1E5DF005E866E /* plum_2@2x.png */; };
 		E23DD1081FF1E5FB005E866E /* plum_13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E23DD1071FF1E5FB005E866E /* plum_13@2x.png */; };
 		E23DD10C1FF1E73F005E866E /* plum_K@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E23DD10B1FF1E73F005E866E /* plum_K@2x.png */; };
-		E28197341FED085100FE9473 /* setCard.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28197331FED085000FE9473 /* setCard.wav */; };
+		E23DD1151FF1F3A7005E866E /* bg_music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E23DD10D1FF1F3A6005E866E /* bg_music2.mp3 */; };
+		E23DD1161FF1F3A7005E866E /* postPoker2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23DD10E1FF1F3A6005E866E /* postPoker2.wav */; };
+		E23DD1171FF1F3A7005E866E /* postPoker.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23DD10F1FF1F3A7005E866E /* postPoker.wav */; };
+		E23DD1181FF1F3A7005E866E /* plose_money.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23DD1101FF1F3A7005E866E /* plose_money.wav */; };
+		E23DD1191FF1F3A7005E866E /* bg_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E23DD1111FF1F3A7005E866E /* bg_music.mp3 */; };
+		E23DD11A1FF1F3A7005E866E /* pwin_money.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23DD1121FF1F3A7005E866E /* pwin_money.wav */; };
+		E23DD11B1FF1F3A7005E866E /* bet.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23DD1131FF1F3A7005E866E /* bet.wav */; };
+		E23DD11C1FF1F3A7005E866E /* selectedbet.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23DD1141FF1F3A7005E866E /* selectedbet.wav */; };
 		E28197371FED08FF00FE9473 /* ZKVoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E28197361FED08FF00FE9473 /* ZKVoiceManager.m */; };
 		E28197391FED0D7C00FE9473 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28197381FED0D7B00FE9473 /* AudioToolbox.framework */; };
 		E2D54ECA1FE9068800BC2ACE /* ZKCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D54EC91FE9068800BC2ACE /* ZKCardView.m */; };
@@ -159,7 +166,14 @@
 		E23DD0F91FF1E5DF005E866E /* plum_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plum_2@2x.png"; sourceTree = "<group>"; };
 		E23DD1071FF1E5FB005E866E /* plum_13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plum_13@2x.png"; sourceTree = "<group>"; };
 		E23DD10B1FF1E73F005E866E /* plum_K@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plum_K@2x.png"; sourceTree = "<group>"; };
-		E28197331FED085000FE9473 /* setCard.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = setCard.wav; sourceTree = "<group>"; };
+		E23DD10D1FF1F3A6005E866E /* bg_music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg_music2.mp3; sourceTree = "<group>"; };
+		E23DD10E1FF1F3A6005E866E /* postPoker2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = postPoker2.wav; sourceTree = "<group>"; };
+		E23DD10F1FF1F3A7005E866E /* postPoker.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = postPoker.wav; sourceTree = "<group>"; };
+		E23DD1101FF1F3A7005E866E /* plose_money.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = plose_money.wav; sourceTree = "<group>"; };
+		E23DD1111FF1F3A7005E866E /* bg_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg_music.mp3; sourceTree = "<group>"; };
+		E23DD1121FF1F3A7005E866E /* pwin_money.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pwin_money.wav; sourceTree = "<group>"; };
+		E23DD1131FF1F3A7005E866E /* bet.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bet.wav; sourceTree = "<group>"; };
+		E23DD1141FF1F3A7005E866E /* selectedbet.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = selectedbet.wav; sourceTree = "<group>"; };
 		E28197351FED08FF00FE9473 /* ZKVoiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKVoiceManager.h; sourceTree = "<group>"; };
 		E28197361FED08FF00FE9473 /* ZKVoiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKVoiceManager.m; sourceTree = "<group>"; };
 		E28197381FED0D7B00FE9473 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -369,7 +383,14 @@
 		E28197321FED085000FE9473 /* Voice */ = {
 			isa = PBXGroup;
 			children = (
-				E28197331FED085000FE9473 /* setCard.wav */,
+				E23DD1131FF1F3A7005E866E /* bet.wav */,
+				E23DD1111FF1F3A7005E866E /* bg_music.mp3 */,
+				E23DD10D1FF1F3A6005E866E /* bg_music2.mp3 */,
+				E23DD1101FF1F3A7005E866E /* plose_money.wav */,
+				E23DD10F1FF1F3A7005E866E /* postPoker.wav */,
+				E23DD10E1FF1F3A6005E866E /* postPoker2.wav */,
+				E23DD1121FF1F3A7005E866E /* pwin_money.wav */,
+				E23DD1141FF1F3A7005E866E /* selectedbet.wav */,
 			);
 			path = Voice;
 			sourceTree = "<group>";
@@ -435,13 +456,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E23DD11B1FF1F3A7005E866E /* bet.wav in Resources */,
 				E23DD0BF1FF1DEB1005E866E /* blackHeart_A@2x.png in Resources */,
 				E23DD0DC1FF1DEB1005E866E /* block_K@2x.png in Resources */,
-				E28197341FED085100FE9473 /* setCard.wav in Resources */,
 				E23DD0D71FF1DEB1005E866E /* blackHeart_J@2x.png in Resources */,
 				E23DD0E01FF1DEB1005E866E /* blackHeart_8@2x.png in Resources */,
 				E23DD0CC1FF1DEB1005E866E /* block_6@2x.png in Resources */,
 				E23DD0BE1FF1DEB1005E866E /* readHeart_K@2x.png in Resources */,
+				E23DD1191FF1F3A7005E866E /* bg_music.mp3 in Resources */,
 				E23DD10C1FF1E73F005E866E /* plum_K@2x.png in Resources */,
 				E23DD0D61FF1DEB1005E866E /* block_J@2x.png in Resources */,
 				E23DD0C71FF1DEB1005E866E /* blackHeart_9@2x.png in Resources */,
@@ -449,6 +471,7 @@
 				E23DD1001FF1E5DF005E866E /* plum_6@2x.png in Resources */,
 				D5E5CE5B1FE6224700522C0B /* LaunchScreen.storyboard in Resources */,
 				E23DD0FC1FF1E5DF005E866E /* plum_A@2x.png in Resources */,
+				E23DD11C1FF1F3A7005E866E /* selectedbet.wav in Resources */,
 				E23DD0E81FF1DEB1005E866E /* readHeart_5@2x.png in Resources */,
 				E23DD0C31FF1DEB1005E866E /* block_Q@2x.png in Resources */,
 				E23DD0BC1FF1DEB1005E866E /* blackHeart_10@2x.png in Resources */,
@@ -474,14 +497,19 @@
 				E23DD0FE1FF1E5DF005E866E /* plum_9@2x.png in Resources */,
 				E23DD0DE1FF1DEB1005E866E /* readHeart_A@2x.png in Resources */,
 				E23DD0FF1FF1E5DF005E866E /* plum_10@2x.png in Resources */,
+				E23DD11A1FF1F3A7005E866E /* pwin_money.wav in Resources */,
+				E23DD1151FF1F3A7005E866E /* bg_music2.mp3 in Resources */,
 				E23DD0D41FF1DEB1005E866E /* block_A@2x.png in Resources */,
 				E23DD1011FF1E5DF005E866E /* plum_4@2x.png in Resources */,
 				E23DD0DA1FF1DEB1005E866E /* blackHeart_K@2x.png in Resources */,
 				E23DD0DD1FF1DEB1005E866E /* readHeart_10@2x.png in Resources */,
 				E23DD0D91FF1DEB1005E866E /* blackHeart_2@2x.png in Resources */,
 				E23DD0E41FF1DEB1005E866E /* readHeart_7@2x.png in Resources */,
+				E23DD1161FF1F3A7005E866E /* postPoker2.wav in Resources */,
 				E23DD1081FF1E5FB005E866E /* plum_13@2x.png in Resources */,
 				E23DD0BA1FF1DEB1005E866E /* blackHeart_3@2x.png in Resources */,
+				E23DD1171FF1F3A7005E866E /* postPoker.wav in Resources */,
+				E23DD1181FF1F3A7005E866E /* plose_money.wav in Resources */,
 				E23DD0B91FF1DEB1005E866E /* block_10@2x.png in Resources */,
 				E23DD1051FF1E5DF005E866E /* plum_Q@2x.png in Resources */,
 				E23DD0EB1FF1DEB1005E866E /* readHeart_9@2x.png in Resources */,
