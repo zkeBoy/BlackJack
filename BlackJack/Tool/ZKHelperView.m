@@ -24,13 +24,13 @@
 }
 
 - (void)setUI {
-    [self addSubview:self.noticeLabel];
-    [self.noticeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.noticeImageView];
+    [self.noticeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.top.equalTo(self).offset(S_HEIGHT*0.55);
         make.left.equalTo(self).offset(ZScale(300));
         make.right.equalTo(self).offset(ZScale(-300));
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(ZScale(22));
     }];
 }
 
@@ -56,17 +56,13 @@
     }];
     
     if (type==resultTypeWin) {
-        [self showTitle:NSLocalizedString(@"You Win", nil)];
-        self.noticeLabel.textColor = [UIColor purpleColor];
+        self.noticeImageView.image = [UIImage imageNamed:@"icon_helpWin"];
     }else if (type==resultTypeLose) {
-        [self showTitle:NSLocalizedString(@"You Lose", nil)];
-        self.noticeLabel.textColor = [UIColor redColor];
+        self.noticeImageView.image = [UIImage imageNamed:@"icon_helpLose"];
     }else if(type==resultTypePush){
-        [self showTitle:NSLocalizedString(@"Push !", nil)];
-        self.noticeLabel.textColor = [UIColor blueColor];
+        self.noticeImageView.image = [UIImage imageNamed:@"icon_helpPush"];
     }else {
-        [self showTitle:NSLocalizedString(@"You Coin!", nil)];
-        self.noticeLabel.textColor = [UIColor yellowColor];
+        self.noticeImageView.image = [UIImage imageNamed:@"icon_helpPush"];
     }
 }
 
