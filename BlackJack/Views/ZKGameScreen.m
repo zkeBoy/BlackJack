@@ -410,14 +410,14 @@
     [self.menuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(ZScale(10));
         make.width.height.mas_equalTo(ZScale(30));
-        make.right.equalTo(self).offset(ZScale(-60));
+        make.left.equalTo(self).offset(ZScale(20));
     }];
     
     [self addSubview:self.voiceBtn];
     [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(ZScale(10));
         make.width.height.mas_equalTo(ZScale(30));
-        make.right.equalTo(self.menuBtn.mas_left).offset(ZScale(-30));
+        make.right.equalTo(self).offset(ZScale(-20));
     }];
 }
 
@@ -438,7 +438,7 @@
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.height.mas_equalTo(ZScale(W_H));
-            make.right.equalTo(self).offset(ZScale(-20));
+            make.left.equalTo(self).offset(ZScale(20));
             make.top.equalTo(self).offset(ZScale(70+index*(W_H+20)));
         }];
         index++;

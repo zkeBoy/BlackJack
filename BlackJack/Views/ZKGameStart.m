@@ -28,7 +28,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setUI];
-        self.backgroundColor = [UIColor redColor];
         [self updatePlayerCoinNum];
         [self hiddenCoinLabel];
     }
@@ -103,9 +102,6 @@
     if (!_playBtn) {
         _playBtn = [[UIButton alloc] init];
         _playBtn.layer.cornerRadius = ZScale(20);
-        //_playBtn.layer.masksToBounds = YES;
-        //_playBtn.backgroundColor = [UIColor purpleColor];
-        //[_playBtn setTitle:@"Play" forState:UIControlStateNormal];
         [_playBtn setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
         [_playBtn addTarget:self action:@selector(playGameAction:) forControlEvents:UIControlEventTouchUpInside];
     }

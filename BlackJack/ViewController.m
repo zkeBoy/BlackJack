@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    //NSLog(@"%@",NSStringFromCGRect(self.view.frame));
     [ZKCardsManager shareCardsManager];
     [self setUpUI];
 }

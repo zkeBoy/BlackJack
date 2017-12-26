@@ -9,7 +9,7 @@
 #ifndef ZKPublickHeader_h
 #define ZKPublickHeader_h
 
-#define ZKDebug 1
+//#define ZKDebug 1
 
 #define S_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define S_HEIGHT [UIScreen mainScreen].bounds.size.height
