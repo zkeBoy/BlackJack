@@ -131,7 +131,7 @@ static NSInteger cards = 52;
 }
 
 - (CGRect)cardDefaultFrame {
-    CGFloat w = ZScale(119/2);
+    CGFloat w = ZScale(110/2);
     CGFloat h = ZScale(165/2);
     CGFloat x = ZScale(577);
     CGFloat y = ZScale(60);
