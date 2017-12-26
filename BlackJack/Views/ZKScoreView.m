@@ -9,6 +9,15 @@
 #import "ZKScoreView.h"
 
 @implementation ZKScoreView
+- (instancetype)initWithFrame:(CGRect)frame andType:(coinType)type {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.type = type;
+        [self setUI];
+        [self setCoin];
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,6 +42,17 @@
     [self addSubview:self.scoreLabel];
     [self.scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
+    }];
+}
+
+- (void)setCoin {
+    self.backgroundView.image = [UIImage imageNamed:@"icon_money"];
+    self.scoreLabel.textAlignment = NSTextAlignmentLeft;
+    [self.scoreLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(ZScale(80));
+        make.centerY.equalTo(self);
+        make.width.equalTo(self.scoreLabel);
+        make.height.mas_equalTo(20);
     }];
 }
 

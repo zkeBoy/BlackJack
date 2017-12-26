@@ -62,7 +62,7 @@
     }else if(type==resultTypePush){
         self.noticeImageView.image = [UIImage imageNamed:@"icon_helpPush"];
     }else {
-        self.noticeImageView.image = [UIImage imageNamed:@"icon_helpPush"];
+        self.noticeImageView.image = [UIImage imageNamed:@"icon_lackCoin"];
     }
 }
 

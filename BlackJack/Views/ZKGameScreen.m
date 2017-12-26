@@ -19,9 +19,7 @@
 @property (nonatomic, strong) ZKScoreView     * playerScore; //玩家得分
 @property (nonatomic, strong) NSMutableArray * allCardViews; //桌面上所有的牌
 @property (nonatomic, strong) NSMutableArray * allCards;
-@property (nonatomic, strong) UIImageView * coinMainView;
-@property (nonatomic, strong) UIImageView * coinImageView;
-@property (nonatomic, strong) UILabel     * coinLabel;   //玩家金币
+@property (nonatomic, strong) ZKScoreView    * coinLabel;
 @property (nonatomic, strong) ZKHelperView* helperView;
 @property (nonatomic, strong) UIButton    * menuBtn; //菜单按钮
 @property (nonatomic, strong) UIButton    * voiceBtn; //声音按钮
@@ -34,7 +32,7 @@
 //下注方法
 - (void)betBtnAction:(UIButton *)button {
     //判断金币是否>=倍数
-    if (self.coinLabel.text.integerValue<self.betlabel.text.integerValue) {
+    if (self.coinLabel.scoreLabel.text.integerValue<self.betlabel.text.integerValue) {
         [self.helperView showResultWithType:resultTypeLack toView:self hiddenBlock:^{
             self.helperView = nil;
         }];
@@ -51,8 +49,8 @@
     ZKCardView * cardView2 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card2.cardImage];
     [self addSubview:cardView1]; [self.allCardViews addObject:cardView1];
     [self addSubview:cardView2]; [self.allCardViews addObject:cardView2];
-    [cardView1 animateWithDuration:0.5 translationX:ZScale(-bEndX) translationY:ZScale(pEndY) completion:nil];
-    [cardView2 animateWithDuration:0.7 translationX:ZScale(-pEndX) translationY:ZScale(pEndY) completion:^{
+    [cardView1 animateWithDuration:0.5 translationX:ZScale(bEndX) translationY:ZScale(pEndY) completion:nil];
+    [cardView2 animateWithDuration:0.7 translationX:ZScale(pEndX) translationY:ZScale(pEndY) completion:^{
         //加载玩家分数
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger s1 = [[ZKCardsManager shareCardsManager] getValueByCard:card1];
@@ -60,7 +58,7 @@
             NSInteger pScore = s1+s2;
             weakself.playerScore.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)pScore];
             weakself.playerScore.hidden = NO;
-            weakself.playerScore.frame = CGRectMake(ZScale(240), ZScale(248), ZScale(30), ZScale(30));
+            weakself.playerScore.frame = CGRectMake(ZScale(305), ZScale(248), ZScale(30), ZScale(30));
             [weakself addSubview:weakself.playerScore];
         });
     }];
@@ -70,13 +68,13 @@
     ZKCardView * cardView3 = [[ZKCardView alloc] initWithFrame:self.cardView.frame andBackViewName:card3.cardImage];
     [self addSubview:cardView3];
     [self.allCardViews addObject:cardView3];
-    [cardView3 animateWithDuration:0.5 translationX:ZScale(-bEndX) translationY:ZScale(bEndY) completion:^{
+    [cardView3 animateWithDuration:0.5 translationX:ZScale(bEndX) translationY:ZScale(bEndY) completion:^{
         //加载庄家分数
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger bScore = [[ZKCardsManager shareCardsManager] getValueByCard:card3];
             weakself.bankerScore.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)bScore];
             weakself.bankerScore.hidden = NO;
-            weakself.bankerScore.frame = CGRectMake(ZScale(240), ZScale(118), ZScale(30), ZScale(30));
+            weakself.bankerScore.frame = CGRectMake(ZScale(305), ZScale(118), ZScale(30), ZScale(30));
             [weakself addSubview:weakself.bankerScore];
         });
     }];
@@ -386,25 +384,12 @@
     
     [self addSubview:self.cardView];
     
-    [self addSubview:self.coinMainView];
-    [self.coinMainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(ZScale(40));
-        make.top.equalTo(self).offset(ZScale(10));
-        make.left.equalTo(self).offset(S_WIDTH/5);
-        make.width.mas_equalTo(ZScale(S_WIDTH/5+20));
-    }];
-    
-    [self.coinMainView addSubview:self.coinImageView];
-    [self.coinImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(ZScale(25));
-        make.left.equalTo(self.coinMainView).offset(5);
-        make.centerY.equalTo(self.coinMainView);
-    }];
-    
-    [self.coinMainView addSubview:self.coinLabel];
+    [self addSubview:self.coinLabel];
     [self.coinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.coinMainView);
-        make.right.equalTo(self.coinMainView).offset(-4);
+        make.height.mas_equalTo(ZScale(40));
+        make.top.equalTo(self).offset(ZScale(50));
+        make.right.equalTo(self).offset(ZScale(-20));
+        make.width.mas_equalTo(ZScale(S_WIDTH/5+20));
     }];
     
     [self addSubview:self.menuBtn];
@@ -456,25 +441,21 @@
 
 #pragma mark - Paivate Method 刷新用户金币
 - (void)updatePlayerCoinNum {
-    _coinLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
+    _coinLabel.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)[ZKCardsManagerDefault playCoinNum]];
 }
 
 - (void)playerWinUpdateCoin {
     [ZKVoiceDefauleManager playVoiceWithType:voiceTypeWin];
     NSInteger coin = self.betlabel.text.integerValue;
     [ZKCardsManagerDefault playerWin:coin];
-    [UIImageView imageView:self.coinImageView animationWithType:ZKAnimationTypeScale completionHandler:^{
-       [self updatePlayerCoinNum];
-    }];
+    [self updatePlayerCoinNum];
 }
 
 - (void)playerLoseUpdateCoin{
     [ZKVoiceDefauleManager playVoiceWithType:voiceTypelose];
     NSInteger coin = self.betlabel.text.integerValue;
     [ZKCardsManagerDefault playerlose:coin];
-    [UIImageView imageView:self.coinImageView animationWithType:ZKAnimationTypeScale completionHandler:^{
-        [self updatePlayerCoinNum];
-    }];
+    [self updatePlayerCoinNum];
 }
 
 #pragma mark - Publick
@@ -575,34 +556,9 @@
     return _playerScore;
 }
 
-- (UIImageView *)coinMainView {
-    if (!_coinMainView) {
-        _coinMainView = [[UIImageView alloc] init];
-        _coinMainView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-        _coinMainView.layer.cornerRadius = 8.0f;
-        _coinMainView.layer.masksToBounds = YES;
-        _coinMainView.layer.borderWidth = 1.5f;
-        _coinMainView.layer.borderColor = [UIColor blackColor].CGColor;
-        _coinMainView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-    }
-    return _coinMainView;
-}
-
-- (UIImageView *)coinImageView {
-    if (!_coinImageView) {
-        _coinImageView = [[UIImageView alloc] init];
-        _coinImageView.image = [UIImage imageNamed:@"icon_coin"];
-    }
-    return _coinImageView;
-}
-
-- (UILabel *)coinLabel {
+- (ZKScoreView *)coinLabel {
     if (!_coinLabel) {
-        _coinLabel = [[UILabel alloc] init];
-        _coinLabel.backgroundColor = [UIColor clearColor];
-        _coinLabel.textAlignment = NSTextAlignmentRight;
-        _coinLabel.textColor = [UIColor whiteColor];
-        _coinLabel.font = [UIFont boldSystemFontOfSize:16];
+        _coinLabel = [[ZKScoreView alloc] initWithFrame:CGRectZero andType:coinTypeCoin];
         [self updatePlayerCoinNum];
     }
     return _coinLabel;

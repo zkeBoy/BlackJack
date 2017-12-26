@@ -10,10 +10,10 @@
 #import <Foundation/Foundation.h>
 #import "ZKCard.h"
 
-#define bEndX 320
+#define bEndX 220
 #define bEndY 30
 
-#define pEndX 300
+#define pEndX 240
 #define pEndY 160
 
 #define ZKCardsManagerDefault [ZKCardsManager shareCardsManager]
