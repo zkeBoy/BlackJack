@@ -25,6 +25,7 @@
 @property (nonatomic, strong) ZKHelperView* helperView;
 @property (nonatomic, strong) UIButton    * menuBtn; //菜单按钮
 @property (nonatomic, strong) UIButton    * voiceBtn; //声音按钮
+@property (nonatomic, strong) UIImageView * cardImageView;
 @end
 
 @implementation ZKGameScreen
@@ -349,30 +350,30 @@
     
     [self addSubview:self.betBtn];
     [self.betBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(ZScale(W_H));
+        make.width.height.mas_equalTo(ZScale(I_W));
         make.left.equalTo(self).offset(ZScale(100));
-        make.bottom.equalTo(self).offset(ZScale(-50));
+        make.bottom.equalTo(self).offset(ZScale(-40));
     }];
     
     [self addSubview:self.doubleBtn];
     [self.doubleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(ZScale(W_H));
+        make.width.height.mas_equalTo(ZScale(I_W));
         make.left.equalTo(self).offset(ZScale(200));
-        make.bottom.equalTo(self).offset(ZScale(-30));
+        make.bottom.equalTo(self).offset(ZScale(-24));
     }];
     
     [self addSubview:self.stopCardBtn];
     [self.stopCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(ZScale(W_H));
+        make.width.height.mas_equalTo(ZScale(I_W));
         make.right.equalTo(self).offset(ZScale(-200));
-        make.bottom.equalTo(self).offset(ZScale(-30));
+        make.bottom.equalTo(self).offset(ZScale(-24));
     }];
      
     [self addSubview:self.moreCardBtn];
     [self.moreCardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(ZScale(W_H));
+        make.width.height.mas_equalTo(ZScale(I_W));
         make.right.equalTo(self).offset(ZScale(-100));
-        make.bottom.equalTo(self).offset(ZScale(-50));
+        make.bottom.equalTo(self).offset(ZScale(-40));
     }];
     
     [self addSubview:self.betlabel];
@@ -418,6 +419,14 @@
         make.top.equalTo(self).offset(ZScale(10));
         make.width.height.mas_equalTo(ZScale(30));
         make.right.equalTo(self).offset(ZScale(-20));
+    }];
+    
+    [self addSubview:self.cardImageView];
+    [self.cardImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(ZScale(200));
+        make.bottom.equalTo(self).offset(ZScale(-140));
+        make.width.mas_equalTo(ZScale(100));
+        make.height.mas_equalTo(ZScale(30));
     }];
 }
 
@@ -639,6 +648,13 @@
     ZKScoreView * score = [[ZKScoreView alloc] init];
     score.hidden = YES;
     return score;
+}
+
+- (UIImageView *)cardImageView {
+    if (!_cardImageView) {
+        _cardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_youcards"]];
+    }
+    return _cardImageView;
 }
 
 /*
