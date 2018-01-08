@@ -22,5 +22,6 @@
 #define userDefaults [NSUserDefaults standardUserDefaults]
 
 static NSString * const playerCoinNumKey = @"playerCoinNum";
+static NSString * const NSNotificationUpdateCoinKey = @"updateCoinKey";
 
 #endif /* ZKPublickHeader_h */

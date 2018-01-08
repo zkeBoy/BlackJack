@@ -335,11 +335,16 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        [self addNotification];
         [self setUI];
         [self setChipButtons];
         [self exchangeBtnEnable:clickTypeEnd];
     }
     return self;
+}
+
+- (void)addNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePlayerCoinNum) name:NSNotificationUpdateCoinKey object:nil];
 }
 
 - (void)setUI {
@@ -611,6 +616,10 @@
         _cardImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_youcards"]];
     }
     return _cardImageView;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /*

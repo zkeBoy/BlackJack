@@ -14,6 +14,9 @@
 @property (nonatomic, strong) UIImageView  * bottomImageView;
 @property (nonatomic, strong) UIImageView  * coinImageView;
 @property (nonatomic, strong) UILabel      * coinLabel;//金币总额
+@property (nonatomic, strong) UIImageView  * lineView;
+@property (nonatomic, strong) ZKScoreView  * bestView; //最高分数
+@property (nonatomic, strong) UIImageView  * addCoinView;
 @end
 
 @implementation ZKGameStart
@@ -29,7 +32,7 @@
     if (self) {
         [self setUI];
         [self updatePlayerCoinNum];
-        [self hiddenCoinLabel];
+        [self addUserCoinAnimation];
     }
     return self;
 }
@@ -38,6 +41,12 @@
     [self addSubview:self.backgroundView];
     [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
+    }];
+    
+    [self addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self);
+        make.height.mas_equalTo(ZScale(38));
     }];
     
     [self addSubview:self.playBtn];
@@ -50,10 +59,10 @@
     
     [self addSubview:self.bottomImageView];
     [self.bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(ZScale(10));
+        make.top.equalTo(self).offset(ZScale(0));
         make.left.equalTo(self).offset(S_WIDTH/5);
         make.width.mas_equalTo(ZScale(S_WIDTH/5+20));
-        make.height.mas_equalTo(ZScale(40));
+        make.height.mas_equalTo(ZScale(32));
     }];
     
     [self.bottomImageView addSubview:self.coinImageView];
@@ -69,11 +78,26 @@
         make.right.equalTo(self.bottomImageView).offset(-4);
     }];
     
+    [self addSubview:self.bestView];
+    [self.bestView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.lineView.mas_bottom).offset(ZScale(20));
+        make.left.equalTo(self).offset(20);
+        make.width.height.mas_equalTo(self.bottomImageView);
+    }];
+    
     [self addSubview:self.voiceBtn];
     [self.voiceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(ZScale(10));
+        make.top.equalTo(self).offset(ZScale(0));
         make.width.height.mas_offset(ZScale(30));
         make.right.equalTo(self).offset(ZScale(-120));
+    }];
+    
+    [self addSubview:self.addCoinView];
+    [self.addCoinView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.top.equalTo(self).offset(40);
+        make.width.mas_equalTo(ZScale(130/2));
+        make.height.mas_equalTo(ZScale(30));
     }];
 }
 
@@ -87,6 +111,20 @@
     self.coinImageView.hidden = YES;
     self.coinLabel.hidden = YES;
     self.voiceBtn.hidden = YES;
+}
+
+- (void)addUserCoinAnimation {
+    self.addCoinView.hidden = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:1.5 animations:^{
+            self.addCoinView.transform = CGAffineTransformMakeScale(2, 2);
+        }completion:^(BOOL finished) {
+            [ZKCardsManagerDefault playerWin:80];
+            self.addCoinView.hidden = YES;
+            [self updatePlayerCoinNum];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationUpdateCoinKey object:nil];
+        }];
+    });
 }
 
 #pragma mark - lazy init
@@ -148,6 +186,32 @@
         _coinLabel.font = [UIFont boldSystemFontOfSize:16];
     }
     return _coinLabel;
+}
+
+- (UIImageView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIImageView alloc] init];
+        _lineView.image = [UIImage imageNamed:@"icon_line"];
+    }
+    return _lineView;
+}
+
+- (ZKScoreView *)bestView {
+    if (!_bestView) {
+        _bestView = [[ZKScoreView alloc] initWithFrame:CGRectZero andType:coinTypeScore];
+        _bestView.backgroundView.image = [UIImage imageNamed:@"icon_best"];
+        _bestView.scoreLabel.text = @"5280";
+        _bestView.scoreLabel.font = [UIFont boldSystemFontOfSize:16];
+    }
+    return _bestView;
+}
+
+- (UIImageView *)addCoinView {
+    if (!_addCoinView) {
+        _addCoinView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_addCoin"]];
+        _addCoinView.hidden = YES;
+    }
+    return _addCoinView;
 }
 
 #pragma mark - Button Method
