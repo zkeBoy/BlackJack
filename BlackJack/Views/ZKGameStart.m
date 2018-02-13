@@ -159,7 +159,7 @@
 - (UIImageView *)bottomImageView {
     if (!_bottomImageView) {
         _bottomImageView = [[UIImageView alloc] init];
-        _bottomImageView.image = [UIImage imageNamed:@""];
+        //_bottomImageView.image = [UIImage imageNamed:@""];
         _bottomImageView.layer.cornerRadius = 8.0f;
         _bottomImageView.layer.masksToBounds = YES;
         _bottomImageView.layer.borderWidth = 1.5f;
