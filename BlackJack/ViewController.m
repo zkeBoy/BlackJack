@@ -17,6 +17,7 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     if (S_HEIGHT<S_WIDTH) {
+        [ZKCardsManager shareCardsManager];
         [self setOrientations];
     }
     return UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
@@ -25,8 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [ZKCardsManager shareCardsManager];
-    
 }
 
 - (void)setOrientations {

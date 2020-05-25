@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIImageView  * lineView;
 @property (nonatomic, strong) ZKScoreView  * bestView; //最高分数
 @property (nonatomic, strong) UIImageView  * addCoinView;
+
+@property (nonatomic, strong) UIImageView  * gameTitleView;
 @end
 
 @implementation ZKGameStart
@@ -52,7 +54,7 @@
     [self addSubview:self.playBtn];
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.bottom.equalTo(self).offset(ZScale(-66));
+        make.bottom.equalTo(self).offset(ZScale(-60));
         make.width.mas_equalTo(ZScale(124));
         make.height.mas_equalTo(ZScale(64));
     }];
@@ -98,6 +100,14 @@
         make.top.equalTo(self).offset(40);
         make.width.mas_equalTo(ZScale(130/2));
         make.height.mas_equalTo(ZScale(30));
+    }];
+    
+    [self addSubview:self.gameTitleView];
+    [self.gameTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.top.equalTo(self).offset(80);
+        make.width.mas_equalTo(ZScale(894/2));
+        make.height.mas_equalTo(ZScale(260/2));
     }];
 }
 
@@ -212,6 +222,13 @@
         _addCoinView.hidden = YES;
     }
     return _addCoinView;
+}
+
+- (UIImageView *)gameTitleView {
+    if (!_gameTitleView) {
+        _gameTitleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_Game_Title"]];
+    }
+    return _gameTitleView;
 }
 
 #pragma mark - Button Method
